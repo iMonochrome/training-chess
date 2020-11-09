@@ -28,7 +28,7 @@ let map = [
     9,11,10, 8, 7,10,11, 9,
   ];
 
-// Create each square for board and apply css property for each square, add chess piece 
+// Create each square for board and apply css property for each square, add chess pieces
 
 for(let i = 0; i < 64; ++i){
     const square = document.createElement("div");
@@ -44,16 +44,17 @@ for(let i = 0; i < 64; ++i){
         black = !black;
     }
 
-    square.innerHTML = !map[i] ? "" : "&#"+ (9811+map[i]) +";";
-
-    board.appendChild(square);
-
     if(index === 8){
         black = !black;
         index = 0;
     }
+//Using Chess symbols in Unicode to create image of chess pieces
+    square.innerHTML = !map[i] ? "" : "&#"+ (9811+map[i]) +";";
 
-   
+//
+    
+    board.appendChild(square);
+
 }
 
 
