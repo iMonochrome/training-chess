@@ -17,7 +17,7 @@ for(let i = 0; i < 8; ++i){
     boardnumbers.appendChild(numbers);
 }
 
-let map = [
+const map = [
     3, 5, 4, 2, 1, 4, 5, 3,
     6, 6, 6, 6, 6, 6, 6, 6,
     0, 0, 0, 0, 0, 0, 0, 0,
@@ -44,6 +44,8 @@ for(let i = 0; i < 64; ++i){
         black = !black;
     }
 
+    square.classList.add ("&#"+ (9811+map[i]));
+
     if(index === 8){
         black = !black;
         index = 0;
@@ -51,11 +53,130 @@ for(let i = 0; i < 64; ++i){
 //Using Chess symbols in Unicode to create image of chess pieces
     square.innerHTML = !map[i] ? "" : "&#"+ (9811+map[i]) +";";
 
+    // if(map[i] != ""){
+        // square.classList.add("&#" + (9811+map[i]) +";")
+    // }    
 //
 
     board.appendChild(square);
 
 }
+
+
+
+
+//Chess pieces
+var chessPieces = {
+    'white': {
+         'king': '&#9812;',
+         'queen': '&#9813;',
+         'rook': '&#9814;',
+         'bishop': '&#9815;',
+         'knight': '&#9816;',
+         'pawn': '&#9817;'
+    },
+    'black': {
+         'king': '&#9818;',
+         'queen': '&#9819;',
+         'rook': '&#9820;',
+         'bishop': '&#9821;',
+         'knight': '&#9822;',
+         'pawn': '&#9823;'
+    }
+};  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
