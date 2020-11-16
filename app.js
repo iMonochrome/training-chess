@@ -2,21 +2,21 @@
 const board = document.getElementById("Chessboard");
 const boardletters = document.querySelector(".letters")
 
-let letters = ["A","B","C","D","E","F","G","H"];
+let letters = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
-for(let i = 0; i < 8;++i){
-    for(let j = 0; j < 8; ++j){
+for (let i = 0; i < 8; ++i) {
+    for (let j = 0; j < 8; ++j) {
         const square = document.createElement("div");
         board.appendChild(square);
         square.classList.add(`square`);
         square.classList.add(`${i % 2 ? 'odd' : 'even'}`)
         square.id = `["${letters[j]}","${i + 1}"]`
 
-        
-    }
-}   
 
-chess.map((c,i) => {
+    }
+}
+
+chess.map((c, i) => {
     const location = JSON.stringify(c.currentSquare)
     const element = document.getElementById(location)
     element.style.backgroundImage = `url(./merida/${c.image}.svg)`
@@ -24,38 +24,44 @@ chess.map((c,i) => {
 })
 
 
+//get position for chesspiece
+const getNextStep = (pieceType, currentSquare, player) => {
+    let newArray = []
 
-    const getNextStep = ( pieceType, currentSquare, player ) => { 
-        let newArray = []
-        //pawn move
-        if(pieceType == 'pawn' && player == 'white'){
-            let index2 = currentSquare.splice(1,1)
-            console.log(index2)
-            let calculate
-            let integer = parseInt(index2,10)
-            for(let i = 0; i < 2; ++i){
-                integer += 1
-                calculate = currentSquare.concat(integer)
-                newArray.push(calculate);
-                
-            }
+    //pawn move
+    if (pieceType == 'pawn' && player == 'white') {
+        let index2 = currentSquare.splice(1, 1)
+        let match
+        let integer = parseInt(index2, 10)
+        for (let i = 0; i < 2; ++i) {
+            integer -= 1
+            match = currentSquare.concat(`${integer}`)
+            newArray.push(match);
         }
-        return newArray
     }
+    return newArray
+}
+//
+const newArray = getNextStep('pawn', ["A", "7"], 'white')
+//
+const changeColorForNextStep = (newArray) => {
+    for (let i = 0; i < newArray.length; ++i) {
+        //lay du lieu theo thu tu trong arrray de khong co the chuyen thanh 1 string
+        let newStep = document.getElementById([`["${newArray[i][0]}","${newArray[i][1]}"]`])
+        newStep.style.backgroundColor = "red"
+    }
+}
+const clearColorForNextStep = (newArray) => {
+    for (let i = 0; i < newArray.length; ++i) {
+    let newStep = document.getElementById([`["${newArray[i][0]}","${newArray[i][1]}"]`])
+        newStep.style.backgroundColor = ""
+    }
+}
+let pawn = document.getElementById(`["A","7"]`)
+pawn.addEventListener("mouseover",function() {
+    changeColorForNextStep(newArray)
+})
 
-
-
-let letters = ["A","B","C","D","E","F","G","H"];
-let asciiKeys = [];
-
-for(let i = 0; i < letters.length; ++i){
-    asciiKeys.push(letters[i].charCodeAt(0));
-}       
-console.log(asciiKeys)
-let asciicode = currentSquare[0].charCodeAt(0);
-        console.log(asciicode);
-
-
-
-
-
+pawn.addEventListener("mouseout",function() {
+    clearColorForNextStep(newArray)
+})
