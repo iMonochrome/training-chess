@@ -13,9 +13,9 @@ for (let i = 0; i < 8; ++i) {
         square.id = `["${letters[j]}","${i + 1}"]`
     }
 }
-
+//add class and id 
 chess.map((c, i) => {
-    const chessname =(c.pieceType)
+    const chessname = (c.pieceType)
     const chesscolor = (c.player)
     const location = JSON.stringify(c.currentSquare)
     const element = document.getElementById(location)
@@ -43,7 +43,7 @@ const getNextStep = (pieceType, currentSquare, player) => {
     return newArray
 }
 //
-// const newArray = getNextStep('pawn', ["A", "7"], 'white')
+// const newArray = getNextStep('pawn', `${pawnid}`, 'white')
 //
 const changeColorForNextStep = (newArray) => {
     for (let i = 0; i < newArray.length; ++i) {
@@ -58,11 +58,28 @@ const clearColorForNextStep = (newArray) => {
         newStep.style.backgroundColor = ""
     }
 }
-let pawn = document.getElementById(`["A","7"]`)
-pawn.addEventListener("mouseover", function () {
-    changeColorForNextStep(newArray)
+let x = document.getElementsByClassName("pawn white")
+let pawn = document.querySelectorAll(".pawn.white")
+// let pawnid = document.getAttribute("id")
+console.log(pawn)
+pawn.forEach(item => {
+    item.addEventListener("mouseover", function () {
+        const currentSquare = JSON.parse(this.getAttribute("id"))
+        const pieceType = this.classList[2]
+        const player = this.classList[3]
+        console.log(pieceType, currentSquare, player)
+        const newArray = getNextStep(pieceType, currentSquare, player)
+        changeColorForNextStep(newArray)
+    })
 })
 
-pawn.addEventListener("mouseout", function () {
-    clearColorForNextStep(newArray)
+pawn.forEach(item => {
+    item.addEventListener("mouseout", function () {
+        const currentSquare = JSON.parse(this.getAttribute("id"))
+        const pieceType = this.classList[2]
+        const player = this.classList[3]
+        console.log(pieceType, currentSquare, player)
+        const newArray = getNextStep(pieceType, currentSquare, player)
+        clearColorForNextStep(newArray)
+    })
 })
