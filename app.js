@@ -11,16 +11,17 @@ for (let i = 0; i < 8; ++i) {
         square.classList.add(`square`);
         square.classList.add(`${i % 2 ? 'odd' : 'even'}`)
         square.id = `["${letters[j]}","${i + 1}"]`
-
-
     }
 }
 
 chess.map((c, i) => {
+    const chessname =(c.pieceType)
+    const chesscolor = (c.player)
     const location = JSON.stringify(c.currentSquare)
     const element = document.getElementById(location)
     element.style.backgroundImage = `url(./merida/${c.image}.svg)`
-
+    element.classList.add(`${chessname}`)
+    element.classList.add(`${chesscolor}`)
 })
 
 
@@ -42,7 +43,7 @@ const getNextStep = (pieceType, currentSquare, player) => {
     return newArray
 }
 //
-const newArray = getNextStep('pawn', ["A", "7"], 'white')
+// const newArray = getNextStep('pawn', ["A", "7"], 'white')
 //
 const changeColorForNextStep = (newArray) => {
     for (let i = 0; i < newArray.length; ++i) {
@@ -53,15 +54,15 @@ const changeColorForNextStep = (newArray) => {
 }
 const clearColorForNextStep = (newArray) => {
     for (let i = 0; i < newArray.length; ++i) {
-    let newStep = document.getElementById([`["${newArray[i][0]}","${newArray[i][1]}"]`])
+        let newStep = document.getElementById([`["${newArray[i][0]}","${newArray[i][1]}"]`])
         newStep.style.backgroundColor = ""
     }
 }
 let pawn = document.getElementById(`["A","7"]`)
-pawn.addEventListener("mouseover",function() {
+pawn.addEventListener("mouseover", function () {
     changeColorForNextStep(newArray)
 })
 
-pawn.addEventListener("mouseout",function() {
+pawn.addEventListener("mouseout", function () {
     clearColorForNextStep(newArray)
 })
