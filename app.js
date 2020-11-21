@@ -110,6 +110,7 @@ pawn.forEach(item => {
 })
 //------------------------
 //rock 
+
 let rock = document.querySelectorAll(".rock.white, .rock.black")
 
 rock.forEach(item => {
