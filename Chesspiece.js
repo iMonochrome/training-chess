@@ -5,165 +5,165 @@ const chess = [
         player: 'white',
         pieceType: 'pawn',
         image: 'whitePawnImageObject',
-        currentSquare: ['A', '7']
+        currentSquare: ['1','7']
     },
     {
         player: 'white',
         pieceType: 'pawn',
         image: 'whitePawnImageObject',
-        currentSquare: ['B', '7']
+        currentSquare: ['2','7']
     }, {
         player: 'white',
         pieceType: 'pawn',
         image: 'whitePawnImageObject',
-        currentSquare: ['C', '7']
+        currentSquare: ['3','7']
     }, {
         player: 'white',
         pieceType: 'pawn',
         image: 'whitePawnImageObject',
-        currentSquare: ['D', '7']
+        currentSquare: ['4','7']
     }, {
         player: 'white',
         pieceType: 'pawn',
         image: 'whitePawnImageObject',
-        currentSquare: ['E', '7']
+        currentSquare: ['5','7']
     }, {
         player: 'white',
         pieceType: 'pawn',
         image: 'whitePawnImageObject',
-        currentSquare: ['F', '7']
+        currentSquare: ['6','7']
     }, {
         player: 'white',
         pieceType: 'pawn',
         image: 'whitePawnImageObject',
-        currentSquare: ['G', '7']
+        currentSquare: ['7','7']
     }, {
         player: 'white',
         pieceType: 'pawn',
         image: 'whitePawnImageObject',
-        currentSquare: ['H', '7']
+        currentSquare: ['8','7']
     }, blackRock = {
         player: 'white',
         pieceType: 'rock',
         image: 'whiteRockImageObject',
-        currentSquare: ['H', '8']
+        currentSquare: ['2','4']
     }, whiteRock = {
         player: 'white',
         pieceType: 'rock',
         image: 'whiteRockImageObject',
-        currentSquare: ['A', '8']
+        currentSquare: ['1','8']
     }, whiteKnight = {
         player: 'black',
         pieceType: 'knight',
         image: 'whiteKnightImageObject',
-        currentSquare: ['G', '8']
+        currentSquare: ['7','8']
     }, whiteKnight = {
         player: 'black',
         pieceType: 'knight',
         image: 'whiteKnightImageObject',
-        currentSquare: ['B', '8']
+        currentSquare: ['2','8']
     }, whiteBishop = {
         player: 'black',
         pieceType: 'bishop',
         image: 'whiteBishopImageObject',
-        currentSquare: ['F', '8']
+        currentSquare: ['6','8']
     }, whiteBishop = {
         player: 'white',
         pieceType: 'bishop',
         image: 'whiteBishopImageObject',
-        currentSquare: ['C', '8']
+        currentSquare: ['3','8']
     }, whiteQueen = {
         player: 'white',
         pieceType: 'queen',
         image: 'whiteQueenImageObject',
-        currentSquare: ['D', '8'],
+        currentSquare: ['4','8'],
     }, whiteKing = {
         player: 'white',
         pieceType: 'king',
         image: 'whiteKingImageObject',
-        currentSquare: ['E', '8'],
+        currentSquare: ['5','8'],
     },
     //black
     blackPawn = {
         player: 'black',
         pieceType: 'pawn',
         image: 'blackPawnImageObject',
-        currentSquare: ['H', '2']
+        currentSquare: ['8','2']
     }, blackPawn = {
         player: 'black',
         pieceType: 'pawn',
         image: 'blackPawnImageObject',
-        currentSquare: ['G', '2']
+        currentSquare: ['7','2']
     }, blackPawn = {
         player: 'black',
         pieceType: 'pawn',
         image: 'blackPawnImageObject',
-        currentSquare: ['F', '2']
+        currentSquare: ['6','2']
     }, blackPawn = {
         player: 'black',
         pieceType: 'pawn',
         image: 'blackPawnImageObject',
-        currentSquare: ['E', '2']
+        currentSquare: ['5','2']
     }, blackPawn = {
         player: 'black',
         pieceType: 'pawn',
         image: 'blackPawnImageObject',
-        currentSquare: ['D', '2']
+        currentSquare: ['4','2']
     }, blackPawn = {
         player: 'black',
         pieceType: 'pawn',
         image: 'blackPawnImageObject',
-        currentSquare: ['C', '2']
+        currentSquare: ['3','2']
     }, blackPawn = {
         player: 'black',
         pieceType: 'pawn',
         image: 'blackPawnImageObject',
-        currentSquare: ['B', '2']
+        currentSquare: ['2','2']
     }, blackPawn = {
         player: 'black',
         pieceType: 'pawn',
         image: 'blackPawnImageObject',
-        currentSquare: ['A', '2']
+        currentSquare: ['1','2']
     }, blackRock = {
         player: 'black',
         pieceType: 'rock',
         image: 'blackRockImageObject',
-        currentSquare: ['H', '1']
+        currentSquare: ['8','1']
     }, blackRock = {
         player: 'black',
         pieceType: 'rock',
         image: 'blackRockImageObject',
-        currentSquare: ['A', '1']
+        currentSquare: ['1','1']
     }, blackKnight = {
         player: 'black',
         pieceType: 'knight',
         image: 'blackKnightImageObject',
-        currentSquare: ['G', '1']
+        currentSquare: ['7','1']
     }, blackKnight = {
         player: 'black',
         pieceType: 'knight',
         image: 'blackKnightImageObject',
-        currentSquare: ['B', '1']
+        currentSquare: ['2','1']
     }, blackBishop = {
         player: 'black',
         pieceType: 'bishop',
         image: 'blackBishopImageObject',
-        currentSquare: ['F', '1']
+        currentSquare: ['6','1']
     }, blackBishop = {
         player: 'black',
         pieceType: 'bishop',
         image: 'blackBishopImageObject',
-        currentSquare: ['C', '1']
+        currentSquare: ['3','1']
     }, blackQueen = {
         player: 'black',
         pieceType: 'queen',
         image: 'blackQueenImageObject',
-        currentSquare: ['D', '1'],
+        currentSquare: ['4','1'],
     }, blackKing = {
         player: 'black',
         pieceType: 'king',
         image: 'blackBishopImageObject',
-        currentSquare: ['E', '1'],
+        currentSquare: ['5','1'],
     }
 
 ]

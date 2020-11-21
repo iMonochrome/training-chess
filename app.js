@@ -4,17 +4,20 @@ const boardletters = document.querySelector(".letters")
 
 let letters = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
+
+
 for (let i = 0; i < 8; ++i) {
     for (let j = 0; j < 8; ++j) {
         const square = document.createElement("div");
         board.appendChild(square);
         square.classList.add(`square`);
         square.classList.add(`${i % 2 ? 'odd' : 'even'}`)
-        square.id = `["${letters[j]}","${i + 1}"]`
+        square.id = `["${j + 1}","${i + 1}"]`
     }
 }
 //add class and id 
-chess.map((c, i) => {
+chess.map((c,i) => {
+   
     const chessname = (c.pieceType)
     const chesscolor = (c.player)
     const location = JSON.stringify(c.currentSquare)
@@ -24,11 +27,11 @@ chess.map((c, i) => {
     element.classList.add(`${chesscolor}`)
 })
 
-
+const converLetterToUSCII = (a) =>{return a.charCodeAt(0)}
 
 const getNextStep = (pieceType, currentSquare, player) => {
     let newArray = []
-    //
+    // pawn white and black 
     switch (pieceType + "|" + player) {
         case 'pawn' + "|" + 'white':{
             let index2 = currentSquare.splice(1, 1)
@@ -50,19 +53,27 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 match = currentSquare.concat(`${integer}`)
                 newArray.push(match);
             }
+            newArray.pop9
+
         return newArray
+        }
+        case 'rock' + "|" + 'white':{
+            let index2 = currentSquare.splice(1,1)
+            let match 
+            let y = parseInt(index2, 10)
+            let x = currentSquare.forEach(element => {
+                element.charCodeAt(`${currentSquare}`)
+            }); 
+            console.log(x)
         }
 
     }
 }
 
-
-//
-// const newArray = getNextStep('pawn', `${pawnid}`, 'white')
 //Calculate next step for white pawn
 const changeColorForNextStep = (newArray) => {
     for (let i = 0; i < newArray.length; ++i) {
-        //lay du lieu theo thu tu trong arrray de khong co the chuyen thanh 1 string
+        //lay du lieu theo thu tu trong arrray de  co the chuyen thanh 1 string
         let newStep = document.getElementById([`["${newArray[i][0]}","${newArray[i][1]}"]`])
         newStep.style.backgroundColor = "red"
     }
@@ -98,8 +109,27 @@ pawn.forEach(item => {
     })
 })
 //------------------------
-//calculate next step for back chess
+//rock 
+let rock = document.querySelectorAll(".rock.white, .rock.black")
 
+rock.forEach(item => {
+    item.addEventListener("mouseover", function(){
+        const currentSquare = JSON.parse(this.getAttribute("id"))
+        const pieceType = this.classList[2]
+        const player = this.classList[3]
+        const newArray = getNextStep(pieceType, currentSquare, player)
+        changeColorForNextStep(newArray)
+    })
+})
+rock.forEach(item => {
+    item.addEventListener("mouseout", function(){
+        const currentSquare = JSON.parse(this.getAttribute("id"))
+        const pieceType = this.classList[2]
+        const player = this.classList[3]
+        const newArray = getNextStep(pieceType, currentSquare, player)
+        clearColorForNextStep(newArray)
+    })
+})
 
 
 
