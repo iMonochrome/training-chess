@@ -53,17 +53,17 @@ const chess = [
         image: 'whiteRockImageObject',
         currentSquare: ['1','8']
     }, whiteKnight = {
-        player: 'black',
+        player: 'white',
         pieceType: 'knight',
         image: 'whiteKnightImageObject',
         currentSquare: ['7','8']
     }, whiteKnight = {
-        player: 'black',
+        player: 'white',
         pieceType: 'knight',
         image: 'whiteKnightImageObject',
         currentSquare: ['2','8']
     }, whiteBishop = {
-        player: 'black',
+        player: 'white',
         pieceType: 'bishop',
         image: 'whiteBishopImageObject',
         currentSquare: ['6','8']
@@ -162,7 +162,7 @@ const chess = [
     }, blackKing = {
         player: 'black',
         pieceType: 'king',
-        image: 'blackBishopImageObject',
+        image: 'blackKingImageObject',
         currentSquare: ['5','1'],
     }
 
