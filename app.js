@@ -18,13 +18,12 @@ for (let i = 0; i < 8; ++i) {
 //add class and id 
 chess.map((c,i) => {
     const chessname = (c.pieceType)
-    const chesscolor = (c.player)       
+    const chesscolor = (c.player)
     const location = JSON.stringify(c.currentSquare)
     const element = document.getElementById(location)
     element.style.backgroundImage = `url(./merida/${c.image}.svg)`
     element.classList.add(`${chessname}`)
     element.classList.add(`${chesscolor}`)
-   
 })
 
 const converLetterToUSCII = (a) =>{return a.charCodeAt(0)}
@@ -58,29 +57,38 @@ const getNextStep = (pieceType, currentSquare, player) => {
         }
         case 'rock' + "|" + 'white':{
             let index2 = currentSquare.splice(1,1)
-            let index1 = parseInt(currentSquare, 10)
             let match 
+            let index1 = parseInt(currentSquare, 10)
             for(let i = 1; i <= 8; ++i){
                 match = (`${index1}`).concat(`${i}`)
                 newArray.push(match)
             }
             for(let i = 1; i <= 8; ++i){
-                match = (`${i}`).concat(`${index2}`)
+                match = (`${i}`).concat(index2)
                 newArray.push(match)
             }
-            console.log(newArray);
-            newArray= checkValidMove(newArray)
-
+            newArray = checkValidMove(newArray)
+            
+            return newArray
         }
 
     }
 }
+//remove all invalidmove for rock 
 const checkValidMove = (Array) => {
-    chess.map((f,i) =>{
-        ID = (f.currentSquare)
-        color = (f.player)
-    })
-    
+    const chessId = chess.map(item => item.currentSquare.join('').toString())
+    const newArray = Array.filter( item => !chessId.includes(item))
+   
+    // chess.map((f,i) =>{
+    //     const ID = (f.currentSquare)
+    //     let joinID = ID.join('').toString()
+    //     const color = (f.player)
+    //     Array = Array.filter(function(item){
+    //         return !item.includes(joinID)
+    //     })
+    //     return Array
+    // })
+    return newArray
 }
 
 
@@ -125,7 +133,7 @@ pawn.forEach(item => {
 //------------------------
 //rock 
 
-let rock = document.querySelectorAll(".rock.white")
+let rock = document.querySelectorAll(".rock.white, .rock.black")
 
 rock.forEach(item => {
     item.addEventListener("mouseover", function(){
