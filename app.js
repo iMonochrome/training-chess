@@ -16,7 +16,7 @@ for (let i = 0; i < 8; ++i) {
     }
 }
 //add class and id 
-chess.map((c,i) => {
+chess.map((c, i) => {
     const chessname = (c.pieceType)
     const chesscolor = (c.player)
     const location = JSON.stringify(c.currentSquare)
@@ -26,13 +26,13 @@ chess.map((c,i) => {
     element.classList.add(`${chesscolor}`)
 })
 
-const converLetterToUSCII = (a) =>{return a.charCodeAt(0)}
+const converLetterToUSCII = (a) => { return a.charCodeAt(0) }
 
 const getNextStep = (pieceType, currentSquare, player) => {
     let newArray = []
     // pawn white and black 
     switch (pieceType + "|" + player) {
-        case 'pawn' + "|" + 'white':{
+        case 'pawn' + "|" + 'white': {
             let index2 = currentSquare.splice(1, 1)
             let match
             let integer = parseInt(index2, 10)
@@ -41,9 +41,9 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 match = currentSquare.concat(`${integer}`)
                 newArray.push(match);
             }
-        return newArray
+            return newArray
         }
-        case 'pawn' + "|" + 'black':{
+        case 'pawn' + "|" + 'black': {
             let index2 = currentSquare.splice(1, 1)
             let match
             let integer = parseInt(index2, 10)
@@ -53,22 +53,38 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 newArray.push(match);
             }
 
-        return newArray
+            return newArray
         }
-        case 'rock' + "|" + 'white':{
-            let index2 = currentSquare.splice(1,1)
-            let match 
+        case 'rock' + "|" + 'white': {
+            let index2 = currentSquare.splice(1, 1)
+            let match
             let index1 = parseInt(currentSquare, 10)
-            for(let i = 1; i <= 8; ++i){
+            for (let i = 1; i <= 8; ++i) {
                 match = (`${index1}`).concat(`${i}`)
                 newArray.push(match)
             }
-            for(let i = 1; i <= 8; ++i){
+            for (let i = 1; i <= 8; ++i) {
                 match = (`${i}`).concat(index2)
                 newArray.push(match)
             }
             newArray = checkValidMove(newArray)
-            
+
+            return newArray
+        }
+        case 'rock' + "|" + 'black': {
+            let index2 = currentSquare.splice(1, 1)
+            let match
+            let index1 = parseInt(currentSquare, 10)
+            for (let i = 1; i <= 8; ++i) {
+                match = (`${index1}`).concat(`${i}`)
+                newArray.push(match)
+            }
+            for (let i = 1; i <= 8; ++i) {
+                match = (`${i}`).concat(index2)
+                newArray.push(match)
+            }
+            newArray = checkValidMove(newArray)
+
             return newArray
         }
 
@@ -77,8 +93,8 @@ const getNextStep = (pieceType, currentSquare, player) => {
 //remove all invalidmove for rock 
 const checkValidMove = (Array) => {
     const chessId = chess.map(item => item.currentSquare.join('').toString())
-    const newArray = Array.filter( item => !chessId.includes(item))
-   
+    const newArray = Array.filter(item => !chessId.includes(item))
+
     // chess.map((f,i) =>{
     //     const ID = (f.currentSquare)
     //     let joinID = ID.join('').toString()
@@ -136,7 +152,7 @@ pawn.forEach(item => {
 let rock = document.querySelectorAll(".rock.white, .rock.black")
 
 rock.forEach(item => {
-    item.addEventListener("mouseover", function(){
+    item.addEventListener("mouseover", function () {
         const currentSquare = JSON.parse(this.getAttribute("id"))
         const pieceType = this.classList[2]
         const player = this.classList[3]
@@ -145,7 +161,7 @@ rock.forEach(item => {
     })
 })
 rock.forEach(item => {
-    item.addEventListener("mouseout", function(){
+    item.addEventListener("mouseout", function () {
         const currentSquare = JSON.parse(this.getAttribute("id"))
         const pieceType = this.classList[2]
         const player = this.classList[3]
