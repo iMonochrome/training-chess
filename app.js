@@ -1,8 +1,19 @@
 
 const board = document.getElementById("Chessboard");
 const boardletters = document.querySelector(".letters")
+const boardnumber = document.querySelector(".numbers")
+let num = 1
+let letters = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
-let letters = ["A", "B", "C", "D", "E", "F", "G", "H"];
+for (let i = 0; i < 8; i++) {
+    let letter = document.createElement("li")
+    letter.textContent = letters[i]
+    boardletters.appendChild(letter)
+    let number = document.createElement('li')
+    number.textContent = num++
+    boardnumber.appendChild(number)
+}
+
 
 
 
@@ -26,12 +37,14 @@ chess.map((c, i) => {
     element.classList.add(`${chesscolor}`)
 })
 
-const converLetterToUSCII = (a) => { return a.charCodeAt(0) }
 
 const getNextStep = (pieceType, currentSquare, player) => {
     let newArray = []
     // pawn white and black 
     switch (pieceType + "|" + player) {
+        case 'pawn' + "|" + 'white': {
+
+        }
         case 'pawn' + "|" + 'white': {
             let index2 = currentSquare.splice(1, 1)
             let match
@@ -43,72 +56,107 @@ const getNextStep = (pieceType, currentSquare, player) => {
             }
             return newArray
         }
-        case 'pawn' + "|" + 'black': {
-            let index2 = currentSquare.splice(1, 1)
-            let match
-            let integer = parseInt(index2, 10)
-            for (let i = 0; i < 2; ++i) {
-                integer += 1
-                match = currentSquare.concat(`${integer}`)
-                newArray.push(match);
-            }
 
-            return newArray
-        }
         case 'rock' + "|" + 'white': {
-            let index2 = currentSquare.splice(1, 1)
-            let match
-            let index1 = parseInt(currentSquare, 10)
-            for (let i = 1; i <= 8; ++i) {
-                match = (`${index1}`).concat(`${i}`)
-                newArray.push(match)
+            for (let i = currentSquare[0] * 1 + 1; i < 9; i++) { // [2,4]
+                // [3, 4]
+                let nextItemsClass = document.getElementById(`["${i}","${currentSquare[1]}"]`).classList
+                if (nextItemsClass.length > 2) {
+                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+                    break;
+                } else {
+                    nextItemsClass.add('jump')
+                }
             }
-            for (let i = 1; i <= 8; ++i) {
-                match = (`${i}`).concat(index2)
-                newArray.push(match)
+            for (let i = currentSquare[0] * 1 - 1; i > 0; i--) { // [2,4]
+                // [3, 4]
+                let nextItemsClass = document.getElementById(`["${i}","${currentSquare[1]}"]`).classList
+                if (nextItemsClass.length > 2) {
+                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+                    break;
+                } else {
+                    nextItemsClass.add('jump')
+                }
             }
-            newArray = checkValidMove(newArray)
-
-            return newArray
+            for (let i = currentSquare[1] * 1 + 1; i < 9; i++) { // [2,4]
+                // [2, 5]
+                let nextItemsClass = document.getElementById(`["${currentSquare[0]}","${i}"]`).classList
+                if (nextItemsClass.length > 2) {
+                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+                    break;
+                } else {
+                    nextItemsClass.add('jump')
+                }
+            }
+            for (let i = currentSquare[1] * 1 - 1; i > 0; i--) { // [2,4]
+                // [2, 5]
+                let nextItemsClass = document.getElementById(`["${currentSquare[0]}","${i}"]`).classList
+                if (nextItemsClass.length > 2) {
+                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+                    break;
+                } else {
+                    nextItemsClass.add('jump')
+                }
+            }
+            break;
         }
         case 'rock' + "|" + 'black': {
-            let index2 = currentSquare.splice(1, 1)
-            let match
-            let index1 = parseInt(currentSquare, 10)
-            for (let i = 1; i <= 8; ++i) {
-                match = (`${index1}`).concat(`${i}`)
-                newArray.push(match)
+            for (let i = currentSquare[0] * 1 + 1; i < 9; i++) { // [2,4]
+                // [3, 4]
+                let nextItemsClass = document.getElementById(`["${i}","${currentSquare[1]}"]`).classList
+                if (nextItemsClass.length > 2) {
+                    nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
+                    break;
+                } else {
+                    nextItemsClass.add('jump')
+                }
             }
-            for (let i = 1; i <= 8; ++i) {
-                match = (`${i}`).concat(index2)
-                newArray.push(match)
+            for (let i = currentSquare[0] * 1 - 1; i > 0; i--) { // [2,4]
+                // [3, 4]
+                let nextItemsClass = document.getElementById(`["${i}","${currentSquare[1]}"]`).classList
+                if (nextItemsClass.length > 2) {
+                    nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
+                    break;
+                } else {
+                    nextItemsClass.add('jump')
+                }
             }
-            newArray = checkValidMove(newArray)
+            for (let i = currentSquare[1] * 1 + 1; i < 9; i++) { // [2,4]
+                // [2, 5]
+                let nextItemsClass = document.getElementById(`["${currentSquare[0]}","${i}"]`).classList
+                if (nextItemsClass.length > 2) {
+                    nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
+                    break;
+                } else {
+                    nextItemsClass.add('jump')
+                }
+            }
+            for (let i = currentSquare[1] * 1 - 1; i > 0; i--) { // [2,4]
+                // [2, 5]
+                let nextItemsClass = document.getElementById(`["${currentSquare[0]}","${i}"]`).classList
+                if (nextItemsClass.length > 2) {
+                    nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
+                    break;
+                } else {
+                    nextItemsClass.add('jump')
+                }
+            }
+            break;
+        }
+        case 'bishop' + "|" + 'white': {
+            index1 = parseInt(currentSquare[0])
+            index2 = parseInt(currentSquare[1])
+            for(){ //[3,5]
+            //[4,6]
+            l
 
-            return newArray
+            }
         }
 
     }
 }
-//remove all invalidmove for rock 
-const checkValidMove = (Array) => {
-    const chessId = chess.map(item => item.currentSquare.join('').toString())
-    const newArray = Array.filter(item => !chessId.includes(item))
 
-    // chess.map((f,i) =>{
-    //     const ID = (f.currentSquare)
-    //     let joinID = ID.join('').toString()
-    //     const color = (f.player)
-    //     Array = Array.filter(function(item){
-    //         return !item.includes(joinID)
-    //     })
-    //     return Array
-    // })
-    return newArray
-}
-
-
-//Calculate next step for white pawn
+//Calculate next step for pawn
 const changeColorForNextStep = (newArray) => {
     for (let i = 0; i < newArray.length; ++i) {
         //lay du lieu theo thu tu trong arrray de  co the chuyen thanh 1 string
@@ -124,52 +172,34 @@ const clearColorForNextStep = (newArray) => {
 }
 
 
-let pawn = document.querySelectorAll(".pawn.white, .pawn.black")
+const allClass = document.querySelectorAll('div:not(.board)')
 
-
-pawn.forEach(item => {
-    item.addEventListener("mouseover", function () {
+allClass.forEach(item => {
+    item.addEventListener("click", function () {
         const currentSquare = JSON.parse(this.getAttribute("id"))
         const pieceType = this.classList[2]
         const player = this.classList[3]
-        const newArray = getNextStep(pieceType, currentSquare, player)
-        changeColorForNextStep(newArray)
+        getNextStep(pieceType, currentSquare, player)
+
     })
 })
 
-pawn.forEach(item => {
-    item.addEventListener("mouseout", function () {
-        const currentSquare = JSON.parse(this.getAttribute("id"))
-        const pieceType = this.classList[2]
-        const player = this.classList[3]
-        const newArray = getNextStep(pieceType, currentSquare, player)
-        clearColorForNextStep(newArray)
-    })
-})
-//------------------------
-//rock 
+// allClass.forEach(item => {
+//     item.addEventListener("mouseout", function () {
+//         const currentSquare = JSON.parse(this.getAttribute("id"))
+//         removeClass(currentSquare)
+//     })
+// })
 
-let rock = document.querySelectorAll(".rock.white, .rock.black")
 
-rock.forEach(item => {
-    item.addEventListener("mouseover", function () {
-        const currentSquare = JSON.parse(this.getAttribute("id"))
-        const pieceType = this.classList[2]
-        const player = this.classList[3]
-        const newArray = getNextStep(pieceType, currentSquare, player)
-        changeColorForNextStep(newArray)
-    })
-})
-rock.forEach(item => {
-    item.addEventListener("mouseout", function () {
-        const currentSquare = JSON.parse(this.getAttribute("id"))
-        const pieceType = this.classList[2]
-        const player = this.classList[3]
-        const newArray = getNextStep(pieceType, currentSquare, player)
-        clearColorForNextStep(newArray)
-    })
-})
+// const removeClass = (currentSquare) => {
+//     var element = document.getElementById(`${currentSquare}`);
+//     if (element.length > 2) {
+//         element.classList.remove("eat");
+//     }
+// }
 
+//-------------------
 
 
 
