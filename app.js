@@ -131,6 +131,7 @@ const getNextStep = (pieceType, currentSquare, player) => {
                     nextItemsClass.add('jump')
                 }
             }
+            //currentSquare[1] * 1 => inerger
             for (let i = currentSquare[1] * 1 - 1; i > 0; i--) { // [2,4]
                 // [2, 5]
                 let nextItemsClass = document.getElementById(`["${currentSquare[0]}","${i}"]`).classList
@@ -144,15 +145,56 @@ const getNextStep = (pieceType, currentSquare, player) => {
             break;
         }
         case 'bishop' + "|" + 'white': {
-            index1 = parseInt(currentSquare[0])
-            index2 = parseInt(currentSquare[1])
-            for(){ //[3,5]
-            //[4,6]
-            l
-
+            // let index1 = parseInt(currentSquare[0]) 
+            //go right, down
+            for (i = currentSquare[1] * 1 + 1, x = currentSquare[0] * 1; i < 9; i++) { //[3,5]
+                //[4,6]
+                x += 1
+                let nextItemsClass = document.getElementById(`["${x}","${i}"]`).classList
+                if (nextItemsClass.length > 2) {
+                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+                    break;
+                } else {
+                    nextItemsClass.add('jump')
+                }
+            }
+            //go right, up
+            for (i = currentSquare[1] * 1 - 1, x = currentSquare[0] * 1; i > 0; i--) { //[3,5]
+                //[4,4],[5,3]
+                x += 1
+                let nextItemsClass = document.getElementById(`["${x}","${i}"]`).classList
+                if (nextItemsClass.length > 2) {
+                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+                    break;
+                } else {
+                    nextItemsClass.add('jump')
+                }
+            }
+            //go left, up
+            for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[3,5]
+                //[2,4],[1,3]
+                x -= 1
+                
+                let nextItemsClass = document.getElementById(`["${i}","${x}"]`).classList
+                if (nextItemsClass.length > 2) {
+                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+                    break;
+                } else {
+                    nextItemsClass.add('jump')
+                }
+            }
+            //go left,down
+            for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[3,5]
+                //[4,4],[5,3]
+                let nextItemsClass = document.getElementById(`["${i}","${x}"]`).classList
+                if (nextItemsClass.length > 2) {
+                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+                    break;
+                } else {
+                    nextItemsClass.add('jump')
+                }
             }
         }
-
     }
 }
 
