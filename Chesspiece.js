@@ -46,7 +46,7 @@ const chess = [
         player: 'white',
         pieceType: 'rock',
         image: 'whiteRockImageObject',
-        currentSquare: ['8','8']
+        currentSquare: ['2','4']
     }, whiteRock = {
         player: 'white',
         pieceType: 'rock',

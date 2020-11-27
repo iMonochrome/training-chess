@@ -150,7 +150,11 @@ const getNextStep = (pieceType, currentSquare, player) => {
             for (i = currentSquare[1] * 1 + 1, x = currentSquare[0] * 1; i < 9; i++) { //[3,5]
                 //[4,6]
                 x += 1
-                let nextItemsClass = document.getElementById(`["${x}","${i}"]`).classList
+                let nextItemsClass = []
+                if (document.getElementById(`["${x}","${i}"]`)){
+                    nextItemsClass = document.getElementById(`["${x}","${i}"]`).classList
+                }
+                else break
                 if (nextItemsClass.length > 2) {
                     nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
                     break;
@@ -184,8 +188,9 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 }
             }
             //go left,down
-            for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[3,5]
-                //[4,4],[5,3]
+            for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[6,2]
+                //[5,3],[4,4]
+                x += 1
                 let nextItemsClass = document.getElementById(`["${i}","${x}"]`).classList
                 if (nextItemsClass.length > 2) {
                     nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
@@ -194,6 +199,7 @@ const getNextStep = (pieceType, currentSquare, player) => {
                     nextItemsClass.add('jump')
                 }
             }
+            break;
         }
     }
 }
