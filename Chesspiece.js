@@ -81,7 +81,7 @@ const chess = [
         player: 'white',
         pieceType: 'king',
         image: 'whiteKingImageObject',
-        currentSquare: ['5','8'],
+        currentSquare: ['4','6'],
     },
     //black
     blackPawn = {
