@@ -60,7 +60,7 @@ const goVerticalWhite = (currentSquare, i) => {
 }
 //--
 //Function for chess to go Horizontally of black
-const goHorizontalBlack= (i, currentSquare) => {
+const goHorizontalBlack = (i, currentSquare) => {
     let nextItemsClass = document.getElementById(`["${i}","${currentSquare}"]`).classList
     if (nextItemsClass.length > 2) {
         nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
@@ -71,7 +71,7 @@ const goHorizontalBlack= (i, currentSquare) => {
     }
 }
 //function for chess to go vertically of black
-const goVerticalblack= (currentSquare, i) => {
+const goVerticalblack = (currentSquare, i) => {
     let nextItemsClass = document.getElementById(`["${currentSquare[0]}","${i}"]`).classList
     if (nextItemsClass.length > 2) {
         nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
@@ -84,8 +84,8 @@ const goVerticalblack= (currentSquare, i) => {
 
 //Function for chess go diagonal right white
 
-const goDiagonallyRightWhite = (x,i) => {
-    
+const goDiagonallyRightWhite = (x, i) => {
+
     let nextItemsClass = []
     if (document.getElementById(`["${x}","${i}"]`)) {
         nextItemsClass = document.getElementById(`["${x}","${i}"]`).classList
@@ -100,7 +100,7 @@ const goDiagonallyRightWhite = (x,i) => {
 }
 //Function for chess go diangonal left white
 
-const goDiagonallyLeftWhite = (i,x) => {
+const goDiagonallyLeftWhite = (i, x) => {
     if (document.getElementById(`["${i}","${x}"]`)) {
         nextItemsClass = document.getElementById(`["${i}","${x}"]`).classList
     }
@@ -114,8 +114,8 @@ const goDiagonallyLeftWhite = (i,x) => {
 }
 //Function for chess go diagonal right black
 
-const goDiagonallyRightBlack= (x,i) => {
-    
+const goDiagonallyRightBlack = (x, i) => {
+
     let nextItemsClass = []
     if (document.getElementById(`["${x}","${i}"]`)) {
         nextItemsClass = document.getElementById(`["${x}","${i}"]`).classList
@@ -130,7 +130,7 @@ const goDiagonallyRightBlack= (x,i) => {
 }
 //Function for chess go diangonal left black
 
-const goDiagonallyLeftBlack= (i,x) => {
+const goDiagonallyLeftBlack = (i, x) => {
     if (document.getElementById(`["${i}","${x}"]`)) {
         nextItemsClass = document.getElementById(`["${i}","${x}"]`).classList
     }
@@ -209,25 +209,25 @@ const getNextStep = (pieceType, currentSquare, player) => {
             for (i = currentSquare[1] * 1 + 1, x = currentSquare[0] * 1; i < 9; i++) { //[3,5]
                 //[4,6]
                 x += 1
-                if(goDiagonallyRightWhite(x,i)) break
+                if (goDiagonallyRightWhite(x, i)) break
             }
             //go right, up
             for (i = currentSquare[1] * 1 - 1, x = currentSquare[0] * 1; i > 0; i--) { //[3,5]
                 //[4,4],[5,3]
                 x += 1
-                if(goDiagonallyRightWhite(x,i)) break
+                if (goDiagonallyRightWhite(x, i)) break
             }
             //go left, up
             for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[3,5]
                 //[2,4],[1,3]
                 x -= 1
-               if(goDiagonallyLeftWhite(i,x)) break
+                if (goDiagonallyLeftWhite(i, x)) break
             }
             //go left,down
             for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[6,2]
                 //[5,3],[4,4]
                 x += 1
-                if(goDiagonallyLeftWhite(i,x)) break
+                if (goDiagonallyLeftWhite(i, x)) break
             }
             break;
         }
@@ -235,25 +235,25 @@ const getNextStep = (pieceType, currentSquare, player) => {
             for (i = currentSquare[1] * 1 + 1, x = currentSquare[0] * 1; i < 9; i++) { //[3,5]
                 //[4,6]
                 x += 1
-                if(goDiagonallyRightBlack(x,i)) break
+                if (goDiagonallyRightBlack(x, i)) break
             }
             //go right, up
             for (i = currentSquare[1] * 1 - 1, x = currentSquare[0] * 1; i > 0; i--) { //[3,5]
                 //[4,4],[5,3]
                 x += 1
-                if(goDiagonallyRightBlack(x,i)) break
+                if (goDiagonallyRightBlack(x, i)) break
             }
             //go left, up
             for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[3,5]
                 //[2,4],[1,3]
                 x -= 1
-               if(goDiagonallyLeftBlack(i,x)) break
+                if (goDiagonallyLeftBlack(i, x)) break
             }
             //go left,down
             for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[6,2]
                 //[5,3],[4,4]
                 x += 1
-                if(goDiagonallyLeftBlack(i,x)) break
+                if (goDiagonallyLeftBlack(i, x)) break
             }
             break;
         }
@@ -277,25 +277,25 @@ const getNextStep = (pieceType, currentSquare, player) => {
             for (i = currentSquare[1] * 1 + 1, x = currentSquare[0] * 1; i < 9; i++) { //[3,5]
                 //[4,6]
                 x += 1
-                if(goDiagonallyRightWhite(x,i)) break
+                if (goDiagonallyRightWhite(x, i)) break
             }
             //go right, up
             for (i = currentSquare[1] * 1 - 1, x = currentSquare[0] * 1; i > 0; i--) { //[3,5]
                 //[4,4],[5,3]
                 x += 1
-                if(goDiagonallyRightWhite(x,i)) break
+                if (goDiagonallyRightWhite(x, i)) break
             }
             //go left, up
             for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[3,5]
                 //[2,4],[1,3]
                 x -= 1
-               if(goDiagonallyLeftWhite(i,x)) break
+                if (goDiagonallyLeftWhite(i, x)) break
             }
             //go left,down
             for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[6,2]
                 //[5,3],[4,4]
                 x += 1
-                if(goDiagonallyLeftWhite(i,x)) break
+                if (goDiagonallyLeftWhite(i, x)) break
             }
             break;
         }
@@ -320,29 +320,70 @@ const getNextStep = (pieceType, currentSquare, player) => {
             for (i = currentSquare[1] * 1 + 1, x = currentSquare[0] * 1; i < 9; i++) { //[3,5]
                 //[4,6]
                 x += 1
-                if(goDiagonallyRightBlack(x,i)) break
+                if (goDiagonallyRightBlack(x, i)) break
             }
             //go right, up
             for (i = currentSquare[1] * 1 - 1, x = currentSquare[0] * 1; i > 0; i--) { //[3,5]
                 //[4,4],[5,3]
                 x += 1
-                if(goDiagonallyRightBlack(x,i)) break
+                if (goDiagonallyRightBlack(x, i)) break
             }
             //go left, up
             for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[3,5]
                 //[2,4],[1,3]
                 x -= 1
-               if(goDiagonallyLeftBlack(i,x)) break
+                if (goDiagonallyLeftBlack(i, x)) break
             }
             //go left,down
             for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[6,2]
                 //[5,3],[4,4]
                 x += 1
-                if(goDiagonallyLeftBlack(i,x)) break
+                if (goDiagonallyLeftBlack(i, x)) break
             }
             break;
         }
-
+        case 'knight' + "|" + 'white': {
+            let x = currentSquare[0] * 1
+            let y = currentSquare[1] * 1
+            let listposition = [`["${x - 1}","${y - 2}"]`, `["${x + 2}","${y + 1}"]`, `["${x + 1}","${y - 2}"]`, `["${x - 2}","${y - 1}"]`,
+            `["${x + 1}","${y + 2}"]`, `["${x + 2}","${y - 1}"]`, `["${x - 1}","${y + 2}"]`, `["${x - 2}","${y + 1}"]`]
+            console.log(listposition);
+            ////
+            for (let i = 0; i < listposition.length; i++) {
+                console.log(listposition[i]);
+                let nextItemsClass = []
+                if (document.getElementById(listposition[i])) {
+                    nextItemsClass = document.getElementById(listposition[i]).classList
+                } else continue
+                if (nextItemsClass.length > 2) {
+                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+                    continue
+                } else {
+                    nextItemsClass.add('jump')
+                }
+            }
+        }
+        case 'knight' + "|" + 'black': {
+            let x = currentSquare[0] * 1
+            let y = currentSquare[1] * 1
+            let listposition = [`["${x - 1}","${y - 2}"]`, `["${x + 2}","${y + 1}"]`, `["${x + 1}","${y - 2}"]`, `["${x - 2}","${y - 1}"]`,
+            `["${x + 1}","${y + 2}"]`, `["${x + 2}","${y - 1}"]`, `["${x - 1}","${y + 2}"]`, `["${x - 2}","${y + 1}"]`]
+            console.log(listposition);
+            ////
+            for (let i = 0; i < listposition.length; i++) {
+                console.log(listposition[i]);
+                let nextItemsClass = []
+                if (document.getElementById(listposition[i])) {
+                    nextItemsClass = document.getElementById(listposition[i]).classList
+                } else continue
+                if (nextItemsClass.length > 2) {
+                    nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
+                    continue
+                } else {
+                    nextItemsClass.add('jump')
+                }
+            }
+        }
     }
 }
 
@@ -361,7 +402,7 @@ const clearColorForNextStep = (newArray) => {
     }
 }
 
-
+//Select every div doesn't have  class board
 const allClass = document.querySelectorAll('div:not(.board)')
 
 allClass.forEach(item => {
