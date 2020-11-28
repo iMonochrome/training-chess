@@ -36,6 +36,112 @@ chess.map((c, i) => {
     element.classList.add(`${chessname}`)
     element.classList.add(`${chesscolor}`)
 })
+//Function for chess to go Horizontally of white
+const goHorizontalWhite = (i, currentSquare) => {
+    let nextItemsClass = document.getElementById(`["${i}","${currentSquare}"]`).classList
+    if (nextItemsClass.length > 2) {
+        nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+        return true
+    } else {
+        nextItemsClass.add('jump')
+        return false
+    }
+}
+//Function for chess to go vertically of white
+const goVerticalWhite = (currentSquare, i) => {
+    let nextItemsClass = document.getElementById(`["${currentSquare[0]}","${i}"]`).classList
+    if (nextItemsClass.length > 2) {
+        nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+        return true
+    } else {
+        nextItemsClass.add('jump')
+        return false
+    }
+}
+//--
+//Function for chess to go Horizontally of black
+const goHorizontalBlack= (i, currentSquare) => {
+    let nextItemsClass = document.getElementById(`["${i}","${currentSquare}"]`).classList
+    if (nextItemsClass.length > 2) {
+        nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
+        return true
+    } else {
+        nextItemsClass.add('jump')
+        return false
+    }
+}
+//function for chess to go vertically of black
+const goVerticalblack= (currentSquare, i) => {
+    let nextItemsClass = document.getElementById(`["${currentSquare[0]}","${i}"]`).classList
+    if (nextItemsClass.length > 2) {
+        nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
+        return true
+    } else {
+        nextItemsClass.add('jump')
+        return false
+    }
+}
+
+//Function for chess go diagonal right white
+
+const goDiagonallyRightWhite = (x,i) => {
+    
+    let nextItemsClass = []
+    if (document.getElementById(`["${x}","${i}"]`)) {
+        nextItemsClass = document.getElementById(`["${x}","${i}"]`).classList
+    }
+    else return true
+    if (nextItemsClass.length > 2) {
+        nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+        return true
+    } else {
+        nextItemsClass.add('jump')
+    }
+}
+//Function for chess go diangonal left white
+
+const goDiagonallyLeftWhite = (i,x) => {
+    if (document.getElementById(`["${i}","${x}"]`)) {
+        nextItemsClass = document.getElementById(`["${i}","${x}"]`).classList
+    }
+    else return true
+    if (nextItemsClass.length > 2) {
+        nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+        return true
+    } else {
+        nextItemsClass.add('jump')
+    }
+}
+//Function for chess go diagonal right black
+
+const goDiagonallyRightBlack= (x,i) => {
+    
+    let nextItemsClass = []
+    if (document.getElementById(`["${x}","${i}"]`)) {
+        nextItemsClass = document.getElementById(`["${x}","${i}"]`).classList
+    }
+    else return true
+    if (nextItemsClass.length > 2) {
+        nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
+        return true
+    } else {
+        nextItemsClass.add('jump')
+    }
+}
+//Function for chess go diangonal left black
+
+const goDiagonallyLeftBlack= (i,x) => {
+    if (document.getElementById(`["${i}","${x}"]`)) {
+        nextItemsClass = document.getElementById(`["${i}","${x}"]`).classList
+    }
+    else return true
+    if (nextItemsClass.length > 2) {
+        nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
+        return true
+    } else {
+        nextItemsClass.add('jump')
+    }
+}
 
 
 const getNextStep = (pieceType, currentSquare, player) => {
@@ -56,151 +162,187 @@ const getNextStep = (pieceType, currentSquare, player) => {
             }
             return newArray
         }
-
+        //rock white and black
         case 'rock' + "|" + 'white': {
             for (let i = currentSquare[0] * 1 + 1; i < 9; i++) { // [2,4]
                 // [3, 4]
-                let nextItemsClass = document.getElementById(`["${i}","${currentSquare[1]}"]`).classList
-                if (nextItemsClass.length > 2) {
-                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
-                    break;
-                } else {
-                    nextItemsClass.add('jump')
-                }
+                if (goHorizontalWhite(i, currentSquare[1])) break
             }
             for (let i = currentSquare[0] * 1 - 1; i > 0; i--) { // [2,4]
                 // [3, 4]
-                let nextItemsClass = document.getElementById(`["${i}","${currentSquare[1]}"]`).classList
-                if (nextItemsClass.length > 2) {
-                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
-                    break;
-                } else {
-                    nextItemsClass.add('jump')
-                }
+                if (goHorizontalWhite(i, currentSquare[1])) break
             }
             for (let i = currentSquare[1] * 1 + 1; i < 9; i++) { // [2,4]
                 // [2, 5]
-                let nextItemsClass = document.getElementById(`["${currentSquare[0]}","${i}"]`).classList
-                if (nextItemsClass.length > 2) {
-                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
-                    break;
-                } else {
-                    nextItemsClass.add('jump')
-                }
+                if (goVerticalWhite(currentSquare[0], i)) break
             }
             for (let i = currentSquare[1] * 1 - 1; i > 0; i--) { // [2,4]
                 // [2, 5]
-                let nextItemsClass = document.getElementById(`["${currentSquare[0]}","${i}"]`).classList
-                if (nextItemsClass.length > 2) {
-                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
-                    break;
-                } else {
-                    nextItemsClass.add('jump')
-                }
+                if (goVerticalWhite(currentSquare[0], i)) break
             }
             break;
         }
         case 'rock' + "|" + 'black': {
             for (let i = currentSquare[0] * 1 + 1; i < 9; i++) { // [2,4]
                 // [3, 4]
-                let nextItemsClass = document.getElementById(`["${i}","${currentSquare[1]}"]`).classList
-                if (nextItemsClass.length > 2) {
-                    nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
-                    break;
-                } else {
-                    nextItemsClass.add('jump')
-                }
+                if (goHorizontalBlack(i, currentSquare[1])) break
             }
             for (let i = currentSquare[0] * 1 - 1; i > 0; i--) { // [2,4]
                 // [3, 4]
-                let nextItemsClass = document.getElementById(`["${i}","${currentSquare[1]}"]`).classList
-                if (nextItemsClass.length > 2) {
-                    nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
-                    break;
-                } else {
-                    nextItemsClass.add('jump')
-                }
+                if (goHorizontalBlack(i, currentSquare[1])) break
             }
             for (let i = currentSquare[1] * 1 + 1; i < 9; i++) { // [2,4]
                 // [2, 5]
-                let nextItemsClass = document.getElementById(`["${currentSquare[0]}","${i}"]`).classList
-                if (nextItemsClass.length > 2) {
-                    nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
-                    break;
-                } else {
-                    nextItemsClass.add('jump')
-                }
+                if (goVerticalblack(currentSquare[0], i)) break
             }
             //currentSquare[1] * 1 => inerger
             for (let i = currentSquare[1] * 1 - 1; i > 0; i--) { // [2,4]
                 // [2, 5]
-                let nextItemsClass = document.getElementById(`["${currentSquare[0]}","${i}"]`).classList
-                if (nextItemsClass.length > 2) {
-                    nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
-                    break;
-                } else {
-                    nextItemsClass.add('jump')
-                }
+                if (goVerticalblack(currentSquare[0], i)) break
             }
             break;
         }
+        // bishop black and white
         case 'bishop' + "|" + 'white': {
             // let index1 = parseInt(currentSquare[0]) 
             //go right, down
             for (i = currentSquare[1] * 1 + 1, x = currentSquare[0] * 1; i < 9; i++) { //[3,5]
                 //[4,6]
                 x += 1
-                let nextItemsClass = []
-                if (document.getElementById(`["${x}","${i}"]`)){
-                    nextItemsClass = document.getElementById(`["${x}","${i}"]`).classList
-                }
-                else break
-                if (nextItemsClass.length > 2) {
-                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
-                    break;
-                } else {
-                    nextItemsClass.add('jump')
-                }
+                if(goDiagonallyRightWhite(x,i)) break
             }
             //go right, up
             for (i = currentSquare[1] * 1 - 1, x = currentSquare[0] * 1; i > 0; i--) { //[3,5]
                 //[4,4],[5,3]
                 x += 1
-                let nextItemsClass = document.getElementById(`["${x}","${i}"]`).classList
-                if (nextItemsClass.length > 2) {
-                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
-                    break;
-                } else {
-                    nextItemsClass.add('jump')
-                }
+                if(goDiagonallyRightWhite(x,i)) break
             }
             //go left, up
             for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[3,5]
                 //[2,4],[1,3]
                 x -= 1
-                
-                let nextItemsClass = document.getElementById(`["${i}","${x}"]`).classList
-                if (nextItemsClass.length > 2) {
-                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
-                    break;
-                } else {
-                    nextItemsClass.add('jump')
-                }
+               if(goDiagonallyLeftWhite(i,x)) break
             }
             //go left,down
             for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[6,2]
                 //[5,3],[4,4]
                 x += 1
-                let nextItemsClass = document.getElementById(`["${i}","${x}"]`).classList
-                if (nextItemsClass.length > 2) {
-                    nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
-                    break;
-                } else {
-                    nextItemsClass.add('jump')
-                }
+                if(goDiagonallyLeftWhite(i,x)) break
             }
             break;
         }
+        case 'bishop' + "|" + 'black': {
+            for (i = currentSquare[1] * 1 + 1, x = currentSquare[0] * 1; i < 9; i++) { //[3,5]
+                //[4,6]
+                x += 1
+                if(goDiagonallyRightBlack(x,i)) break
+            }
+            //go right, up
+            for (i = currentSquare[1] * 1 - 1, x = currentSquare[0] * 1; i > 0; i--) { //[3,5]
+                //[4,4],[5,3]
+                x += 1
+                if(goDiagonallyRightBlack(x,i)) break
+            }
+            //go left, up
+            for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[3,5]
+                //[2,4],[1,3]
+                x -= 1
+               if(goDiagonallyLeftBlack(i,x)) break
+            }
+            //go left,down
+            for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[6,2]
+                //[5,3],[4,4]
+                x += 1
+                if(goDiagonallyLeftBlack(i,x)) break
+            }
+            break;
+        }
+        case 'queen' + "|" + 'white': {
+            for (let i = currentSquare[0] * 1 + 1; i < 9; i++) { // [2,4]
+                // [3, 4]
+                if (goHorizontalWhite(i, currentSquare[1])) break
+            }
+            for (let i = currentSquare[0] * 1 - 1; i > 0; i--) { // [2,4]
+                // [3, 4]
+                if (goHorizontalWhite(i, currentSquare[1])) break
+            }
+            for (let i = currentSquare[1] * 1 + 1; i < 9; i++) { // [2,4]
+                // [2, 5]
+                if (goVerticalWhite(currentSquare[0], i)) break
+            }
+            for (let i = currentSquare[1] * 1 - 1; i > 0; i--) { // [2,4]
+                // [2, 5]
+                if (goVerticalWhite(currentSquare[0], i)) break
+            }
+            for (i = currentSquare[1] * 1 + 1, x = currentSquare[0] * 1; i < 9; i++) { //[3,5]
+                //[4,6]
+                x += 1
+                if(goDiagonallyRightWhite(x,i)) break
+            }
+            //go right, up
+            for (i = currentSquare[1] * 1 - 1, x = currentSquare[0] * 1; i > 0; i--) { //[3,5]
+                //[4,4],[5,3]
+                x += 1
+                if(goDiagonallyRightWhite(x,i)) break
+            }
+            //go left, up
+            for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[3,5]
+                //[2,4],[1,3]
+                x -= 1
+               if(goDiagonallyLeftWhite(i,x)) break
+            }
+            //go left,down
+            for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[6,2]
+                //[5,3],[4,4]
+                x += 1
+                if(goDiagonallyLeftWhite(i,x)) break
+            }
+            break;
+        }
+        case 'queen' + "|" + 'black': {
+            for (let i = currentSquare[0] * 1 + 1; i < 9; i++) { // [2,4]
+                // [3, 4]
+                if (goHorizontalBlack(i, currentSquare[1])) break
+            }
+            for (let i = currentSquare[0] * 1 - 1; i > 0; i--) { // [2,4]
+                // [3, 4]
+                if (goHorizontalBlack(i, currentSquare[1])) break
+            }
+            for (let i = currentSquare[1] * 1 + 1; i < 9; i++) { // [2,4]
+                // [2, 5]
+                if (goVerticalblack(currentSquare[0], i)) break
+            }
+            //currentSquare[1] * 1 => inerger
+            for (let i = currentSquare[1] * 1 - 1; i > 0; i--) { // [2,4]
+                // [2, 5]
+                if (goVerticalblack(currentSquare[0], i)) break
+            }
+            for (i = currentSquare[1] * 1 + 1, x = currentSquare[0] * 1; i < 9; i++) { //[3,5]
+                //[4,6]
+                x += 1
+                if(goDiagonallyRightBlack(x,i)) break
+            }
+            //go right, up
+            for (i = currentSquare[1] * 1 - 1, x = currentSquare[0] * 1; i > 0; i--) { //[3,5]
+                //[4,4],[5,3]
+                x += 1
+                if(goDiagonallyRightBlack(x,i)) break
+            }
+            //go left, up
+            for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[3,5]
+                //[2,4],[1,3]
+                x -= 1
+               if(goDiagonallyLeftBlack(i,x)) break
+            }
+            //go left,down
+            for (i = currentSquare[0] * 1 - 1, x = currentSquare[1] * 1; i > 0; i--) { //[6,2]
+                //[5,3],[4,4]
+                x += 1
+                if(goDiagonallyLeftBlack(i,x)) break
+            }
+            break;
+        }
+
     }
 }
 
