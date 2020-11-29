@@ -148,21 +148,6 @@ const getNextStep = (pieceType, currentSquare, player) => {
     let newArray = []
     // pawn white and black 
     switch (pieceType + "|" + player) {
-        case 'pawn' + "|" + 'white': {
-
-        }
-        case 'pawn' + "|" + 'white': {
-            let index2 = currentSquare.splice(1, 1)
-            let match
-            let integer = parseInt(index2, 10)
-            for (let i = 0; i < 2; ++i) {
-                integer -= 1
-                match = currentSquare.concat(`${integer}`)
-                newArray.push(match);
-            }
-            return newArray
-        }
-        break;
         //rock white and black
         case 'rock' + "|" + 'white': {
             for (let i = currentSquare[0] * 1 + 1; i < 9; i++) { // [2,4]
@@ -181,9 +166,8 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 // [2, 5]
                 if (goVerticalWhite(currentSquare[0], i)) break
             }
-            break;
         }
-        break;
+            break;
         case 'rock' + "|" + 'black': {
             for (let i = currentSquare[0] * 1 + 1; i < 9; i++) { // [2,4]
                 // [3, 4]
@@ -202,9 +186,8 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 // [2, 5]
                 if (goVerticalblack(currentSquare[0], i)) break
             }
-            break;
         }
-        break;
+            break;
         // bishop black and white
         case 'bishop' + "|" + 'white': {
             // let index1 = parseInt(currentSquare[0]) 
@@ -232,9 +215,8 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 x += 1
                 if (goDiagonallyLeftWhite(i, x)) break
             }
-            break;
         }
-        break;
+            break;
         case 'bishop' + "|" + 'black': {
             for (i = currentSquare[1] * 1 + 1, x = currentSquare[0] * 1; i < 9; i++) { //[3,5]
                 //[4,6]
@@ -259,9 +241,8 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 x += 1
                 if (goDiagonallyLeftBlack(i, x)) break
             }
-            break;
         }
-        break;  
+            break;
         case 'queen' + "|" + 'white': {
             for (let i = currentSquare[0] * 1 + 1; i < 9; i++) { // [2,4]
                 // [3, 4]
@@ -302,9 +283,8 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 x += 1
                 if (goDiagonallyLeftWhite(i, x)) break
             }
-            break;
         }
-        break;
+            break;
         case 'queen' + "|" + 'black': {
             for (let i = currentSquare[0] * 1 + 1; i < 9; i++) { // [2,4]
                 // [3, 4]
@@ -346,18 +326,16 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 x += 1
                 if (goDiagonallyLeftBlack(i, x)) break
             }
-            break;
         }
-        break;
+            break;
+
         case 'knight' + "|" + 'white': {
             let x = currentSquare[0] * 1
             let y = currentSquare[1] * 1
             let listposition = [`["${x - 1}","${y - 2}"]`, `["${x + 2}","${y + 1}"]`, `["${x + 1}","${y - 2}"]`, `["${x - 2}","${y - 1}"]`,
             `["${x + 1}","${y + 2}"]`, `["${x + 2}","${y - 1}"]`, `["${x - 1}","${y + 2}"]`, `["${x - 2}","${y + 1}"]`]
-            console.log(listposition);
             ////
             for (let i = 0; i < listposition.length; i++) {
-                console.log(listposition[i]);
                 let nextItemsClass = []
                 if (document.getElementById(listposition[i])) {
                     nextItemsClass = document.getElementById(listposition[i]).classList
@@ -370,16 +348,15 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 }
             }
         }
-        break;
+            break;
         case 'knight' + "|" + 'black': {
             let x = currentSquare[0] * 1
             let y = currentSquare[1] * 1
-            let list= [`["${x - 1}","${y - 2}"]`, `["${x + 2}","${y + 1}"]`, `["${x + 1}","${y - 2}"]`, `["${x - 2}","${y - 1}"]`,
+            let list = [`["${x - 1}","${y - 2}"]`, `["${x + 2}","${y + 1}"]`, `["${x + 1}","${y - 2}"]`, `["${x - 2}","${y - 1}"]`,
             `["${x + 1}","${y + 2}"]`, `["${x + 2}","${y - 1}"]`, `["${x - 1}","${y + 2}"]`, `["${x - 2}","${y + 1}"]`]
-            
+
             ////
             for (let i = 0; i < list.length; i++) {
-                console.log(list[i]);
                 let nextItemsClass = []
                 if (document.getElementById(list[i])) {
                     nextItemsClass = document.getElementById(list[i]).classList
@@ -392,17 +369,15 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 }
             }
         }
-        break;
+            break;
         case 'king' + "|" + 'white': {
-            console.log(currentSquare);
-            let x = currentSquare[0] *1
-            let y = currentSquare[1] *1
-            console.log(x,y);
-            let listposition = [`["${x - 1}","${y - 1}"]`,`["${x}","${y - 1}"]`,`["${x + 1}","${y - 1}"]`,`["${x + 1}","${y}"]`,
-            `["${x + 1}","${y + 1}"]`,`["${x}","${y + 1}"]`,`["${x - 1}","${y + 1}"]`,`["${x - 1}","${y}"]`]
+            let x = currentSquare[0] * 1
+            let y = currentSquare[1] * 1
+            let listposition = [`["${x - 1}","${y - 1}"]`, `["${x}","${y - 1}"]`, `["${x + 1}","${y - 1}"]`, `["${x + 1}","${y}"]`,
+            `["${x + 1}","${y + 1}"]`, `["${x}","${y + 1}"]`, `["${x - 1}","${y + 1}"]`, `["${x - 1}","${y}"]`]
             //
             for (let i = 0; i < listposition.length; i++) {
-                console.log(listposition[i]);
+
                 let nextItemsClass = []
                 if (document.getElementById(listposition[i])) {
                     nextItemsClass = document.getElementById(listposition[i]).classList
@@ -415,17 +390,14 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 }
             }
         }
-        break;
+            break;
         case 'king' + "|" + 'black': {
-            console.log(currentSquare);
-            let x = currentSquare[0] *1
-            let y = currentSquare[1] *1
-            console.log(x,y);
-            let listposition = [`["${x - 1}","${y - 1}"]`,`["${x}","${y - 1}"]`,`["${x + 1}","${y - 1}"]`,`["${x + 1}","${y}"]`,
-            `["${x + 1}","${y + 1}"]`,`["${x}","${y + 1}"]`,`["${x - 1}","${y + 1}"]`,`["${x - 1}","${y}"]`]
+            let x = currentSquare[0] * 1
+            let y = currentSquare[1] * 1
+            let listposition = [`["${x - 1}","${y - 1}"]`, `["${x}","${y - 1}"]`, `["${x + 1}","${y - 1}"]`, `["${x + 1}","${y}"]`,
+            `["${x + 1}","${y + 1}"]`, `["${x}","${y + 1}"]`, `["${x - 1}","${y + 1}"]`, `["${x - 1}","${y}"]`]
             //
             for (let i = 0; i < listposition.length; i++) {
-                console.log(listposition[i]);
                 let nextItemsClass = []
                 if (document.getElementById(listposition[i])) {
                     nextItemsClass = document.getElementById(listposition[i]).classList
@@ -438,7 +410,27 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 }
             }
         }
-        break;
+            break;
+        case 'pawn' + "|" + 'white': {
+            let x = currentSquare[0] * 1
+            let y = currentSquare[1] * 1
+
+            if (y == 7) {
+                for (let i = 0; i < 2; i++) {
+                    y -= 1
+                    let nextItemsClass = document.getElementById(`["${x}","${y}"]`).classList
+                    if (nextItemsClass.length > 2) {
+                        if (nextItemsClass[3] === 'white') {break}
+                            else if (nextItemsClass[3] === 'black') {break}
+                    } else {
+                        nextItemsClass.add('jump')
+                    } 
+                }
+            } else {
+                
+            }
+        }
+            break;
     }
 }
 
@@ -470,20 +462,6 @@ allClass.forEach(item => {
     })
 })
 
-// allClass.forEach(item => {
-//     item.addEventListener("mouseout", function () {
-//         const currentSquare = JSON.parse(this.getAttribute("id"))
-//         removeClass(currentSquare)
-//     })
-// })
-
-
-// const removeClass = (currentSquare) => {
-//     var element = document.getElementById(`${currentSquare}`);
-//     if (element.length > 2) {
-//         element.classList.remove("eat");
-//     }
-// }
 
 //-------------------
 
