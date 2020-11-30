@@ -539,6 +539,15 @@ allClass.forEach(item => {
 })
 
 
+const removeClass = () => {
+    for (let i = 0; i < 8; ++i) {
+        for (let j = 0; j < 8; ++j) {
+            const allClassList = document.getElementById(`["${j + 1}","${i + 1}"]`).classList
+             allClassList.remove("eat")
+             allClassList.remove("jump")
+        }
+    }
+}
 //-------------------
 
 
