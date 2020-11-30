@@ -414,7 +414,7 @@ const getNextStep = (pieceType, currentSquare, player) => {
         case 'pawn' + "|" + 'white': {
             let x = currentSquare[0] * 1
             let y = currentSquare[1] * 1
-
+            let eatPosition = [`["${x-1}","${y-1}"]`,`["${x+1}","${y-1}"]`]
             if (y == 7) {
                 for (let i = 0; i < 2; i++) {
                     y -= 1
@@ -426,11 +426,87 @@ const getNextStep = (pieceType, currentSquare, player) => {
                         nextItemsClass.add('jump')
                     } 
                 }
+                for(let i = 0; i < eatPosition.length; i ++){
+                    let nextItemsClass = []
+                    if(document.getElementById(eatPosition[i])) {
+                        nextItemsClass = document.getElementById(eatPosition[i]).classList
+                    }else continue
+                    if(nextItemsClass.length > 2){
+                        nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+                        continue
+                    }
+                }
             } else {
-                
+                let moveOneStep = [`["${x}","${y-1}"]`]
+                let nextItemsClass = document.getElementById(moveOneStep).classList
+                if (nextItemsClass.length > 2) {
+                    if (nextItemsClass[3] === 'white') {break}
+                        else if (nextItemsClass[3] === 'black') {break}
+                } else {
+                    nextItemsClass.add('jump')
+                } 
+                for(let i = 0; i < eatPosition.length; i ++){
+                    let nextItemsClass = []
+                    if(document.getElementById(eatPosition[i])) {
+                        nextItemsClass = document.getElementById(eatPosition[i]).classList
+                    }else continue
+                    if(nextItemsClass.length > 2){
+                        nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
+                        continue
+                    }
+                }
             }
         }
             break;
+            case 'pawn' + "|" + 'black': {
+                let x = currentSquare[0] * 1
+                let y = currentSquare[1] * 1
+                let eatPosition = [`["${x-1}","${y+1}"]`,`["${x+1}","${y+1}"]`]
+                //when the pawn in the default posi
+                if (y == 2) {
+                    for (let i = 0; i < 2; i++) {
+                        y += 1
+                        let nextItemsClass = document.getElementById(`["${x}","${y}"]`).classList
+                        if (nextItemsClass.length > 2) {
+                            if (nextItemsClass[3] === 'white') {break}
+                                else if (nextItemsClass[3] === 'black') {break}
+                        } else {
+                            nextItemsClass.add('jump')
+                        } 
+                    }
+                    for(let i = 0; i < eatPosition.length; i ++){
+                        let nextItemsClass = []
+                        if(document.getElementById(eatPosition[i])) {
+                            nextItemsClass = document.getElementById(eatPosition[i]).classList
+                        }else continue
+                        if(nextItemsClass.length > 2){
+                            nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
+                            continue
+                        }
+                    }
+                // move position when the pawn not in the default posi
+                } else {
+                    let moveOneStep = [`["${x}","${y+1}"]`]
+                    let nextItemsClass = document.getElementById(moveOneStep).classList
+                    if (nextItemsClass.length > 2) {
+                        if (nextItemsClass[3] === 'white') {break}
+                            else if (nextItemsClass[3] === 'black') {break}
+                    } else {
+                        nextItemsClass.add('jump')
+                    } 
+                    for(let i = 0; i < eatPosition.length; i ++){
+                        let nextItemsClass = []
+                        if(document.getElementById(eatPosition[i])) {
+                            nextItemsClass = document.getElementById(eatPosition[i]).classList
+                        }else continue
+                        if(nextItemsClass.length > 2){
+                            nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
+                            continue
+                        }
+                    }
+                }
+            }
+                break;
     }
 }
 

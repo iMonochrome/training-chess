@@ -11,7 +11,7 @@ const chess = [
         player: 'white',
         pieceType: 'pawn',
         image: 'whitePawnImageObject',
-        currentSquare: ['2','7']
+        currentSquare: ['2','6']
     }, {
         player: 'white',
         pieceType: 'pawn',
@@ -88,7 +88,7 @@ const chess = [
         player: 'black',
         pieceType: 'pawn',
         image: 'blackPawnImageObject',
-        currentSquare: ['4','5']
+        currentSquare: ['3','5']
     }, blackPawn = {
         player: 'black',
         pieceType: 'pawn',
