@@ -14,9 +14,6 @@ for (let i = 0; i < 8; i++) {
     boardnumber.appendChild(number)
 }
 
-
-
-
 for (let i = 0; i < 8; ++i) {
     for (let j = 0; j < 8; ++j) {
         const square = document.createElement("div");
@@ -510,45 +507,53 @@ const getNextStep = (pieceType, currentSquare, player) => {
     }
 }
 
-//Calculate next step for pawn
-const changeColorForNextStep = (newArray) => {
-    for (let i = 0; i < newArray.length; ++i) {
-        //lay du lieu theo thu tu trong arrray de  co the chuyen thanh 1 string
-        let newStep = document.getElementById([`["${newArray[i][0]}","${newArray[i][1]}"]`])
-        newStep.style.backgroundColor = "red"
-    }
-}
-const clearColorForNextStep = (newArray) => {
-    for (let i = 0; i < newArray.length; ++i) {
-        let newStep = document.getElementById([`["${newArray[i][0]}","${newArray[i][1]}"]`])
-        newStep.style.backgroundColor = ""
-    }
-}
 
 //Select every div doesn't have  class board
 const allClass = document.querySelectorAll('div:not(.board)')
 
+
 allClass.forEach(item => {
     item.addEventListener("click", function () {
+        removeClass()
         const currentSquare = JSON.parse(this.getAttribute("id"))
+        classL(currentSquare)
         const pieceType = this.classList[2]
         const player = this.classList[3]
         getNextStep(pieceType, currentSquare, player)
-
+        
     })
 })
 
 
+//change color when click on chess piece
+const classL = (currentSquare) => {
+    let x = currentSquare[0] * 1
+    let y = currentSquare[1] * 1
+    let classElement = document.getElementById([`["${x}","${y}"]`])
+    console.log(classElement);
+    classElement.classList.add("yellow")
+}
+
+//delete color when click on another piece
 const removeClass = () => {
     for (let i = 0; i < 8; ++i) {
         for (let j = 0; j < 8; ++j) {
-            const allClassList = document.getElementById(`["${j + 1}","${i + 1}"]`).classList
+            const allClassList = document.getElementById(`["${j + 1}","${i + 1}"]`).classList       
              allClassList.remove("eat")
              allClassList.remove("jump")
+             allClassList.remove("yellow")
         }
     }
 }
 //-------------------
+//Moving chess
+
+chess.map((c, i) => {
+    const location = JSON.stringify(c.currentSquare)
+    const element = document.getElementById(location)
+   
+})
+
 
 
 

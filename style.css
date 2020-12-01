@@ -53,14 +53,10 @@ body{
     background-repeat: no-repeat;
 }
 
-  /* div{
-    width:52px;
-    height:52px;
-    float:left;
-    font-size:40px;
-    line-height:52px;
-    text-align:center;
-  } */
+.yellow {
+    background-color: yellow!important;
+}
+
 
 .numbers {
     
