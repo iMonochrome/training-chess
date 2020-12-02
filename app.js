@@ -23,16 +23,21 @@ for (let i = 0; i < 8; ++i) {
         square.id = `["${j + 1}","${i + 1}"]`
     }
 }
-//add class and id 
-chess.map((c, i) => {
-    const chessname = (c.pieceType)
-    const chesscolor = (c.player)
-    const location = JSON.stringify(c.currentSquare)
-    const element = document.getElementById(location)
-    element.style.backgroundImage = `url(./merida/${c.image}.svg)`
-    element.classList.add(`${chessname}`)
-    element.classList.add(`${chesscolor}`)
-})
+const renderChessItems = chessList => {
+    //add class and id 
+    chessList.map((c, i) => {
+        const chessname = (c.pieceType)
+        const chesscolor = (c.player)
+        const location = JSON.stringify(c.currentSquare)
+        const element = document.getElementById(location)
+        element.style.backgroundImage = `url(./merida/${c.image}.svg)`
+        element.classList.add(`${chessname}`)
+        element.classList.add(`${chesscolor}`)
+    })
+}
+
+renderChessItems(chess)
+
 //Function for chess to go Horizontally of white
 const goHorizontalWhite = (i, currentSquare) => {
     let nextItemsClass = document.getElementById(`["${i}","${currentSquare}"]`).classList
@@ -55,7 +60,6 @@ const goVerticalWhite = (currentSquare, i) => {
         return false
     }
 }
-//--
 //Function for chess to go Horizontally of black
 const goHorizontalBlack = (i, currentSquare) => {
     let nextItemsClass = document.getElementById(`["${i}","${currentSquare}"]`).classList
@@ -142,7 +146,6 @@ const goDiagonallyLeftBlack = (i, x) => {
 
 
 const getNextStep = (pieceType, currentSquare, player) => {
-    let newArray = []
     // pawn white and black 
     switch (pieceType + "|" + player) {
         //rock white and black
@@ -455,7 +458,7 @@ const getNextStep = (pieceType, currentSquare, player) => {
             }
         }
             break;
-            case 'pawn' + "|" + 'black': {
+        case 'pawn' + "|" + 'black': {
                 let x = currentSquare[0] * 1
                 let y = currentSquare[1] * 1
                 let eatPosition = [`["${x-1}","${y+1}"]`,`["${x+1}","${y+1}"]`]
@@ -510,17 +513,27 @@ const getNextStep = (pieceType, currentSquare, player) => {
 
 //Select every div doesn't have  class board
 const allClass = document.querySelectorAll('div:not(.board)')
-
+let chessSelector
 
 allClass.forEach(item => {
     item.addEventListener("click", function () {
-        removeClass()
+
         const currentSquare = JSON.parse(this.getAttribute("id"))
         classL(currentSquare)
         const pieceType = this.classList[2]
         const player = this.classList[3]
-        getNextStep(pieceType, currentSquare, player)
         
+        if(chessSelector){
+            switchCurrentSquare(chessSelector, currentSquare)
+            chessSelector = null
+            removeClass()
+        }else{
+            getNextStep(pieceType, currentSquare, player)
+            if(player){
+                chessSelector = currentSquare
+            }
+            else chessSelector = null
+        }
     })
 })
 
@@ -530,7 +543,6 @@ const classL = (currentSquare) => {
     let x = currentSquare[0] * 1
     let y = currentSquare[1] * 1
     let classElement = document.getElementById([`["${x}","${y}"]`])
-    console.log(classElement);
     classElement.classList.add("yellow")
 }
 
@@ -548,11 +560,19 @@ const removeClass = () => {
 //-------------------
 //Moving chess
 
-chess.map((c, i) => {
-    const location = JSON.stringify(c.currentSquare)
-    const element = document.getElementById(location)
-   
-})
+const switchCurrentSquare = (selector, curr) => {
+    //compare 2 string instend of compare 2 ô nhớ 
+    let position = chess.filter(item => JSON.stringify(item.currentSquare) == JSON.stringify(selector))
+    const currentChess = document.getElementById(JSON.stringify(selector))
+    currentChess.classList.remove(currentChess.classList[2])
+    currentChess.classList.remove(currentChess.classList[3])
+    currentChess.removeAttribute("style")
+    if (position){
+        position[0].currentSquare = curr
+        renderChessItems(chess)
+    }
+
+}
 
 
 
