@@ -33,6 +33,7 @@ const renderChessItems = chessList => {
         element.style.backgroundImage = `url(./merida/${c.image}.svg)`
         element.classList.add(`${chessname}`)
         element.classList.add(`${chesscolor}`)
+        
     })
 }
 
@@ -439,12 +440,6 @@ const getNextStep = (pieceType, currentSquare, player) => {
             } else {
                 let moveOneStep = [`["${x}","${y-1}"]`]
                 let nextItemsClass = document.getElementById(moveOneStep).classList
-                if (nextItemsClass.length > 2) {
-                    if (nextItemsClass[3] === 'white') {break}
-                        else if (nextItemsClass[3] === 'black') {break}
-                } else {
-                    nextItemsClass.add('jump')
-                } 
                 for(let i = 0; i < eatPosition.length; i ++){
                     let nextItemsClass = []
                     if(document.getElementById(eatPosition[i])) {
@@ -455,6 +450,13 @@ const getNextStep = (pieceType, currentSquare, player) => {
                         continue
                     }
                 }
+                if (nextItemsClass.length > 2) {
+                    if (nextItemsClass[3] === 'white') {break}
+                        else if (nextItemsClass[3] === 'black') {break}
+                } else {
+                    nextItemsClass.add('jump')
+                } 
+               
             }
         }
             break;
@@ -488,12 +490,6 @@ const getNextStep = (pieceType, currentSquare, player) => {
                 } else {
                     let moveOneStep = [`["${x}","${y+1}"]`]
                     let nextItemsClass = document.getElementById(moveOneStep).classList
-                    if (nextItemsClass.length > 2) {
-                        if (nextItemsClass[3] === 'white') {break}
-                            else if (nextItemsClass[3] === 'black') {break}
-                    } else {
-                        nextItemsClass.add('jump')
-                    } 
                     for(let i = 0; i < eatPosition.length; i ++){
                         let nextItemsClass = []
                         if(document.getElementById(eatPosition[i])) {
@@ -504,6 +500,12 @@ const getNextStep = (pieceType, currentSquare, player) => {
                             continue
                         }
                     }
+                    if (nextItemsClass.length > 2) {
+                        if (nextItemsClass[3] === 'white') {break}
+                            else if (nextItemsClass[3] === 'black') {break}
+                    } else {
+                        nextItemsClass.add('jump')
+                    } 
                 }
             }
                 break;
@@ -519,14 +521,14 @@ allClass.forEach(item => {
     item.addEventListener("click", function () {
 
         const currentSquare = JSON.parse(this.getAttribute("id"))
-        classL(currentSquare)
+        changeColorForSelectedPiece(currentSquare)
         const pieceType = this.classList[2]
         const player = this.classList[3]
         
         if(chessSelector){
             switchCurrentSquare(chessSelector, currentSquare)
-            chessSelector = null
             removeClass()
+            chessSelector = null
         }else{
             getNextStep(pieceType, currentSquare, player)
             if(player){
@@ -539,7 +541,7 @@ allClass.forEach(item => {
 
 
 //change color when click on chess piece
-const classL = (currentSquare) => {
+const changeColorForSelectedPiece = (currentSquare) => {
     let x = currentSquare[0] * 1
     let y = currentSquare[1] * 1
     let classElement = document.getElementById([`["${x}","${y}"]`])
@@ -559,22 +561,43 @@ const removeClass = () => {
 }
 //-------------------
 //Moving chess
-
+//chạy khi lần đầu click vào một quân cờ
+//(vị trí ở lần click thứ 1, vị trí lần click thứ 2) 
 const switchCurrentSquare = (selector, curr) => {
+    //xóa hình ảnh quân cờ tại vi trí ban đầu
     //compare 2 string instend of compare 2 ô nhớ 
-    let position = chess.filter(item => JSON.stringify(item.currentSquare) == JSON.stringify(selector))
-    const currentChess = document.getElementById(JSON.stringify(selector))
-    currentChess.classList.remove(currentChess.classList[2])
-    currentChess.classList.remove(currentChess.classList[3])
-    currentChess.removeAttribute("style")
-    if (position){
-        position[0].currentSquare = curr
-        renderChessItems(chess)
-    }
+    // let position = chess.filter(item => JSON.stringify(item.currentSquare) == JSON.stringify(selector))
+    let position = chess.forEach(item => {
+        if(JSON.stringify(item.currentSquare) == JSON.stringify(selector)){
+            item.currentSquare = curr
+            console.log(item);
+            renderChessItems(chess)
+            console.log(chess);
+        }
+    })
+    // const currentChess = document.getElementById(JSON.stringify(selector))
+    // currentChess.classList.remove(currentChess.classList[2])
+    // currentChess.classList.remove("black")
+    // currentChess.classList.remove("white")  
+    // currentChess.removeAttribute("style")
+   
+    //xóa cờ khi nó ăn được quân cờ
+    // let move = chess.filter(item => JSON.stringify(item.currentSquare) == JSON.stringify(curr))
+    
+    const movePosition = document.getElementById(JSON.stringify(curr))
+    // console.log(movePosition);
+    //
+    
+    // if (position[0].player == "white"){
+    //     if(move.length !== 0){
+    //     move[0].currentSquare = ["0","0"]
+    //     movePosition.classList.remove(movePosition.classList[2])
+    //     movePosition.classList.remove("black")
+    //     movePosition.removeAttribute("style")
+    //     }
+    // }
 
+   
 }
 
-
-
-
-
+        
