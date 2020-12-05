@@ -26,13 +26,13 @@ for (let i = 0; i < 8; ++i) {
 const renderChessItems = chessList => {
     //add class and id 
     chessList.map((c, i) => {
-        const chessname = (c.pieceType)
-        const chesscolor = (c.player)
-        const location = JSON.stringify(c.currentSquare)
-        const element = document.getElementById(location)
-        element.style.backgroundImage = `url(./merida/${c.image}.svg)`
-        element.classList.add(`${chessname}`)
-        element.classList.add(`${chesscolor}`)
+            const chessname = (c.pieceType)
+            const chesscolor = (c.player)
+            const location = JSON.stringify(c.currentSquare)
+            const element = document.getElementById(location)
+            element.style.backgroundImage = `url(./merida/${c.image}.svg)`
+            element.classList.add(`${chessname}`)
+            element.classList.add(`${chesscolor}`)
         
     })
 }
@@ -415,100 +415,100 @@ const getNextStep = (pieceType, currentSquare, player) => {
         case 'pawn' + "|" + 'white': {
             let x = currentSquare[0] * 1
             let y = currentSquare[1] * 1
-            let eatPosition = [`["${x-1}","${y-1}"]`,`["${x+1}","${y-1}"]`]
+            let eatPosition = [`["${x - 1}","${y - 1}"]`, `["${x + 1}","${y - 1}"]`]
             if (y == 7) {
                 for (let i = 0; i < 2; i++) {
                     y -= 1
                     let nextItemsClass = document.getElementById(`["${x}","${y}"]`).classList
                     if (nextItemsClass.length > 2) {
-                        if (nextItemsClass[3] === 'white') {break}
-                            else if (nextItemsClass[3] === 'black') {break}
+                        if (nextItemsClass[3] === 'white') { break }
+                        else if (nextItemsClass[3] === 'black') { break }
                     } else {
                         nextItemsClass.add('jump')
-                    } 
+                    }
                 }
-                for(let i = 0; i < eatPosition.length; i ++){
+                for (let i = 0; i < eatPosition.length; i++) {
                     let nextItemsClass = []
-                    if(document.getElementById(eatPosition[i])) {
+                    if (document.getElementById(eatPosition[i])) {
                         nextItemsClass = document.getElementById(eatPosition[i]).classList
-                    }else continue
-                    if(nextItemsClass.length > 2){
+                    } else continue
+                    if (nextItemsClass.length > 2) {
                         nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
                         continue
                     }
                 }
             } else {
-                let moveOneStep = [`["${x}","${y-1}"]`]
+                let moveOneStep = [`["${x}","${y - 1}"]`]
                 let nextItemsClass = document.getElementById(moveOneStep).classList
-                for(let i = 0; i < eatPosition.length; i ++){
+                for (let i = 0; i < eatPosition.length; i++) {
                     let nextItemsClass = []
-                    if(document.getElementById(eatPosition[i])) {
+                    if (document.getElementById(eatPosition[i])) {
                         nextItemsClass = document.getElementById(eatPosition[i]).classList
-                    }else continue
-                    if(nextItemsClass.length > 2){
+                    } else continue
+                    if (nextItemsClass.length > 2) {
                         nextItemsClass[3] === 'black' && nextItemsClass.add('eat')
                         continue
                     }
                 }
                 if (nextItemsClass.length > 2) {
-                    if (nextItemsClass[3] === 'white') {break}
-                        else if (nextItemsClass[3] === 'black') {break}
+                    if (nextItemsClass[3] === 'white') { break }
+                    else if (nextItemsClass[3] === 'black') { break }
                 } else {
                     nextItemsClass.add('jump')
-                } 
-               
+                }
+
             }
         }
             break;
         case 'pawn' + "|" + 'black': {
-                let x = currentSquare[0] * 1
-                let y = currentSquare[1] * 1
-                let eatPosition = [`["${x-1}","${y+1}"]`,`["${x+1}","${y+1}"]`]
-                //when the pawn in the default posi
-                if (y == 2) {
-                    for (let i = 0; i < 2; i++) {
-                        y += 1
-                        let nextItemsClass = document.getElementById(`["${x}","${y}"]`).classList
-                        if (nextItemsClass.length > 2) {
-                            if (nextItemsClass[3] === 'white') {break}
-                                else if (nextItemsClass[3] === 'black') {break}
-                        } else {
-                            nextItemsClass.add('jump')
-                        } 
-                    }
-                    for(let i = 0; i < eatPosition.length; i ++){
-                        let nextItemsClass = []
-                        if(document.getElementById(eatPosition[i])) {
-                            nextItemsClass = document.getElementById(eatPosition[i]).classList
-                        }else continue
-                        if(nextItemsClass.length > 2){
-                            nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
-                            continue
-                        }
-                    }
-                // move position when the pawn not in the default posi
-                } else {
-                    let moveOneStep = [`["${x}","${y+1}"]`]
-                    let nextItemsClass = document.getElementById(moveOneStep).classList
-                    for(let i = 0; i < eatPosition.length; i ++){
-                        let nextItemsClass = []
-                        if(document.getElementById(eatPosition[i])) {
-                            nextItemsClass = document.getElementById(eatPosition[i]).classList
-                        }else continue
-                        if(nextItemsClass.length > 2){
-                            nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
-                            continue
-                        }
-                    }
+            let x = currentSquare[0] * 1
+            let y = currentSquare[1] * 1
+            let eatPosition = [`["${x - 1}","${y + 1}"]`, `["${x + 1}","${y + 1}"]`]
+            //when the pawn in the default posi
+            if (y == 2) {
+                for (let i = 0; i < 2; i++) {
+                    y += 1
+                    let nextItemsClass = document.getElementById(`["${x}","${y}"]`).classList
                     if (nextItemsClass.length > 2) {
-                        if (nextItemsClass[3] === 'white') {break}
-                            else if (nextItemsClass[3] === 'black') {break}
+                        if (nextItemsClass[3] === 'white') { break }
+                        else if (nextItemsClass[3] === 'black') { break }
                     } else {
                         nextItemsClass.add('jump')
-                    } 
+                    }
+                }
+                for (let i = 0; i < eatPosition.length; i++) {
+                    let nextItemsClass = []
+                    if (document.getElementById(eatPosition[i])) {
+                        nextItemsClass = document.getElementById(eatPosition[i]).classList
+                    } else continue
+                    if (nextItemsClass.length > 2) {
+                        nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
+                        continue
+                    }
+                }
+                // move position when the pawn not in the default posi
+            } else {
+                let moveOneStep = [`["${x}","${y + 1}"]`]
+                let nextItemsClass = document.getElementById(moveOneStep).classList
+                for (let i = 0; i < eatPosition.length; i++) {
+                    let nextItemsClass = []
+                    if (document.getElementById(eatPosition[i])) {
+                        nextItemsClass = document.getElementById(eatPosition[i]).classList
+                    } else continue
+                    if (nextItemsClass.length > 2) {
+                        nextItemsClass[3] === 'white' && nextItemsClass.add('eat')
+                        continue
+                    }
+                }
+                if (nextItemsClass.length > 2) {
+                    if (nextItemsClass[3] === 'white') { break }
+                    else if (nextItemsClass[3] === 'black') { break }
+                } else {
+                    nextItemsClass.add('jump')
                 }
             }
-                break;
+        }
+            break;
     }
 }
 
@@ -516,7 +516,7 @@ const getNextStep = (pieceType, currentSquare, player) => {
 //Select every div doesn't have  class board
 const allClass = document.querySelectorAll('div:not(.board)')
 let chessSelector
-
+// var eat
 allClass.forEach(item => {
     item.addEventListener("click", function () {
 
@@ -524,14 +524,16 @@ allClass.forEach(item => {
         changeColorForSelectedPiece(currentSquare)
         const pieceType = this.classList[2]
         const player = this.classList[3]
-        
-        if(chessSelector){
+
+        if (chessSelector) {
+            
             switchCurrentSquare(chessSelector, currentSquare)
             removeClass()
             chessSelector = null
-        }else{
+        } else {
             getNextStep(pieceType, currentSquare, player)
-            if(player){
+            // eat = document.getElementsByClassName("eat")
+            if (player) {
                 chessSelector = currentSquare
             }
             else chessSelector = null
@@ -552,52 +554,46 @@ const changeColorForSelectedPiece = (currentSquare) => {
 const removeClass = () => {
     for (let i = 0; i < 8; ++i) {
         for (let j = 0; j < 8; ++j) {
-            const allClassList = document.getElementById(`["${j + 1}","${i + 1}"]`).classList       
-             allClassList.remove("eat")
-             allClassList.remove("jump")
-             allClassList.remove("yellow")
+            const allClassList = document.getElementById(`["${j + 1}","${i + 1}"]`).classList
+            allClassList.remove("eat")
+            allClassList.remove("jump")
+            allClassList.remove("yellow")
         }
     }
 }
 //-------------------
+
 //Moving chess
 //chạy khi lần đầu click vào một quân cờ
 //(vị trí ở lần click thứ 1, vị trí lần click thứ 2) 
 const switchCurrentSquare = (selector, curr) => {
     //xóa hình ảnh quân cờ tại vi trí ban đầu
     //compare 2 string instend of compare 2 ô nhớ 
-    // let position = chess.filter(item => JSON.stringify(item.currentSquare) == JSON.stringify(selector))
-    let position = chess.forEach(item => {
-        if(JSON.stringify(item.currentSquare) == JSON.stringify(selector)){
-            item.currentSquare = curr
-            console.log(item);
-            renderChessItems(chess)
-            console.log(chess);
+    
+    const nextMove = document.getElementById(JSON.stringify(curr))
+    for(let i = 0; i < chess.length; i++){
+        if(JSON.stringify(chess[i].currentSquare) == JSON.stringify(curr)){
+            chess.splice(i,1)
         }
-    })
-    // const currentChess = document.getElementById(JSON.stringify(selector))
-    // currentChess.classList.remove(currentChess.classList[2])
-    // currentChess.classList.remove("black")
-    // currentChess.classList.remove("white")  
-    // currentChess.removeAttribute("style")
-   
-    //xóa cờ khi nó ăn được quân cờ
-    // let move = chess.filter(item => JSON.stringify(item.currentSquare) == JSON.stringify(curr))
-    
-    const movePosition = document.getElementById(JSON.stringify(curr))
-    // console.log(movePosition);
-    //
-    
-    // if (position[0].player == "white"){
-    //     if(move.length !== 0){
-    //     move[0].currentSquare = ["0","0"]
-    //     movePosition.classList.remove(movePosition.classList[2])
-    //     movePosition.classList.remove("black")
-    //     movePosition.removeAttribute("style")
+    }       
+    // chess.forEach(item => {
+    //     if(JSON.stringify(item.currentSquare) == JSON.stringify(curr)){
+    //         item.currentSquare = ""
     //     }
-    // }
-
-   
+    // })
+    chess.forEach(item => {
+        if (JSON.stringify(item.currentSquare) == JSON.stringify(selector)) {
+            const currentChess = document.getElementById(JSON.stringify(selector))
+            currentChess.classList.remove(currentChess.classList[2])
+            currentChess.classList.remove("black")
+            currentChess. classList.remove("white") 
+            currentChess.removeAttribute("style")
+            item.currentSquare = curr
+            renderChessItems(chess)
+        }
+        
+        
+    })
 }
 
-        
+
