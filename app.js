@@ -26,14 +26,14 @@ for (let i = 0; i < 8; ++i) {
 const renderChessItems = chessList => {
     //add class and id 
     chessList.map((c, i) => {
-            const chessname = (c.pieceType)
-            const chesscolor = (c.player)
-            const location = JSON.stringify(c.currentSquare)
-            const element = document.getElementById(location)
-            element.style.backgroundImage = `url(./merida/${c.image}.svg)`
-            element.classList.add(`${chessname}`)
-            element.classList.add(`${chesscolor}`)
-        
+        const chessname = (c.pieceType)
+        const chesscolor = (c.player)
+        const location = JSON.stringify(c.currentSquare)
+        const element = document.getElementById(location)
+        element.style.backgroundImage = `url(./merida/${c.image}.svg)`
+        element.classList.add(`${chessname}`)
+        element.classList.add(`${chesscolor}`)
+
     })
 }
 
@@ -521,12 +521,12 @@ allClass.forEach(item => {
     item.addEventListener("click", function () {
 
         const currentSquare = JSON.parse(this.getAttribute("id"))
-        changeColorForSelectedPiece(currentSquare)
+        // changeColorForSelectedPiece(currentSquare)
         const pieceType = this.classList[2]
         const player = this.classList[3]
 
         if (chessSelector) {
-            
+
             switchCurrentSquare(chessSelector, currentSquare)
             removeClass()
             chessSelector = null
@@ -568,32 +568,39 @@ const removeClass = () => {
 //(vị trí ở lần click thứ 1, vị trí lần click thứ 2) 
 const switchCurrentSquare = (selector, curr) => {
     //xóa hình ảnh quân cờ tại vi trí ban đầu
-    //compare 2 string instend of compare 2 ô nhớ 
-    
-    const nextMove = document.getElementById(JSON.stringify(curr))
-    for(let i = 0; i < chess.length; i++){
-        if(JSON.stringify(chess[i].currentSquare) == JSON.stringify(curr)){
-            chess.splice(i,1)
+
+    //delete Objecet when the chess eat another one before re-render the chess board
+    // 
+  
+        for (let i = 0; i < chess.length; i++) {
+            if(JSON.stringify(selector) == JSON.stringify(curr)){
+                break
+            }
+            else if (JSON.stringify(chess[i].currentSquare) == JSON.stringify(curr)) {
+                const nextMove = document.getElementById(JSON.stringify(curr))
+                nextMove.classList.remove(nextMove.classList[2])
+                nextMove.classList.remove("black")
+                nextMove.classList.remove("white")
+                chess.splice(i, 1)
+                console.log(nextMove.classList);
+            }
         }
-    }       
-    // chess.forEach(item => {
-    //     if(JSON.stringify(item.currentSquare) == JSON.stringify(curr)){
-    //         item.currentSquare = ""
-    //     }
-    // })
+    
     chess.forEach(item => {
-        if (JSON.stringify(item.currentSquare) == JSON.stringify(selector)) {
+        if (JSON.stringify(item.currentSquare) == JSON.stringify(selector)) {  //compare 2 string instend of compare 2 ô nhớ 
             const currentChess = document.getElementById(JSON.stringify(selector))
             currentChess.classList.remove(currentChess.classList[2])
             currentChess.classList.remove("black")
-            currentChess. classList.remove("white") 
+            currentChess.classList.remove("white")
             currentChess.removeAttribute("style")
             item.currentSquare = curr
             renderChessItems(chess)
         }
-        
-        
     })
 }
 
+const switchTurn = (color) => {
+    if (color == 'black') {
 
+    }
+}
