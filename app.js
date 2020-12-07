@@ -516,28 +516,36 @@ const getNextStep = (pieceType, currentSquare, player) => {
 //Select every div doesn't have  class board
 const allClass = document.querySelectorAll('div:not(.board)')
 let chessSelector
-// var eat
+
+let turn = 'white'
+let firstClick = true;
+
 allClass.forEach(item => {
     item.addEventListener("click", function () {
+        if (!this.classList.contains(turn) && firstClick) return
+            const currentSquare = JSON.parse(this.getAttribute("id"))
+            changeColorForSelectedPiece(currentSquare)
+            const pieceType = this.classList[2]
+            const player = this.classList[3]
 
-        const currentSquare = JSON.parse(this.getAttribute("id"))
-        // changeColorForSelectedPiece(currentSquare)
-        const pieceType = this.classList[2]
-        const player = this.classList[3]
-
-        if (chessSelector) {
-
-            switchCurrentSquare(chessSelector, currentSquare)
-            removeClass()
-            chessSelector = null
-        } else {
-            getNextStep(pieceType, currentSquare, player)
-            // eat = document.getElementsByClassName("eat")
-            if (player) {
-                chessSelector = currentSquare
-            }
-            else chessSelector = null
+            if (chessSelector) {
+                switchCurrentSquare(chessSelector, currentSquare)
+                removeClass()
+                chessSelector = null
+                turn = turn === 'white' ? 'black' : 'white'
+                firstClick = true
+            } else {
+                getNextStep(pieceType, currentSquare, player)
+                // eat = document.getElementsByClassName("eat")
+                if (player) {
+                    chessSelector = currentSquare
+                }
+                else chessSelector = null
+                firstClick = false
+            
         }
+        console.log('turn', turn)
+        console.log('firstClick', firstClick)
     })
 })
 
@@ -571,21 +579,20 @@ const switchCurrentSquare = (selector, curr) => {
 
     //delete Objecet when the chess eat another one before re-render the chess board
     // 
-  
-        for (let i = 0; i < chess.length; i++) {
-            if(JSON.stringify(selector) == JSON.stringify(curr)){
-                break
-            }
-            else if (JSON.stringify(chess[i].currentSquare) == JSON.stringify(curr)) {
-                const nextMove = document.getElementById(JSON.stringify(curr))
-                nextMove.classList.remove(nextMove.classList[2])
-                nextMove.classList.remove("black")
-                nextMove.classList.remove("white")
-                chess.splice(i, 1)
-                console.log(nextMove.classList);
-            }
+
+    for (let i = 0; i < chess.length; i++) {
+        if (JSON.stringify(selector) == JSON.stringify(curr)) {
+            break
         }
-    
+        else if (JSON.stringify(chess[i].currentSquare) == JSON.stringify(curr)) {
+            const nextMove = document.getElementById(JSON.stringify(curr))
+            nextMove.classList.remove(nextMove.classList[2])
+            nextMove.classList.remove("black")
+            nextMove.classList.remove("white")
+            chess.splice(i, 1)
+        }
+    }
+
     chess.forEach(item => {
         if (JSON.stringify(item.currentSquare) == JSON.stringify(selector)) {  //compare 2 string instend of compare 2 ô nhớ 
             const currentChess = document.getElementById(JSON.stringify(selector))
@@ -599,8 +606,6 @@ const switchCurrentSquare = (selector, curr) => {
     })
 }
 
-const switchTurn = (color) => {
-    if (color == 'black') {
 
-    }
-}
+
+
