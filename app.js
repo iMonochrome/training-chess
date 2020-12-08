@@ -532,7 +532,7 @@ allClass.forEach(item => {
                 switchCurrentSquare(chessSelector, currentSquare)
                 removeClass()
                 chessSelector = null
-                turn = turn === 'white' ? 'black' : 'white'
+                turn = (turn === 'white') ? 'black' : 'white'
                 firstClick = true
             } else {
                 getNextStep(pieceType, currentSquare, player)
