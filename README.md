@@ -1,2 +1,3 @@
-# training-chess
-Chess game with HTML/CSS/JS
+## Welcome to GitHub Pages
+
+My Deploy page: https://portgasdax99.github.io/training-chess/
